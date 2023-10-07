@@ -1,3 +1,7 @@
+:root {
+  --background-white: #FDFDFD;
+}
+
 .landing-background {
   background-color: var(--orange);
   display: flex;
@@ -20,7 +24,7 @@ ellipse {
 }
 
 .landing-content {
-  background-color: #FDFDFD;
+  background-color: var(--background-white);
   font-size: calc(10px + 2vmin);
   padding: 0 4.5vh 0 4.5vh;
   position: absolute;
