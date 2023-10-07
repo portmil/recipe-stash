@@ -12,7 +12,6 @@
 .landing-ellipse {
   position: absolute;
   top: 20vh;
-  left: 0;
   width: 100%;
 }
 
@@ -25,6 +24,5 @@ ellipse {
   font-size: calc(10px + 2vmin);
   padding: 0 4.5vh 0 4.5vh;
   position: absolute;
-  top: 30vh;
-  left: 0
+  top: 40vh
 }
