@@ -1,0 +1,26 @@
+:root {
+  --black: #2A2626;
+  --white: #F5F6EE;
+  --orange: #EF960A;
+  --green: #2E4836;
+  --red: #9F072B;
+  --yellow: #F3E141; 
+}
+
+body {
+  background-color: #FDFDFD;
+  color: var(--black);
+}
+
+.App {
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Poetsen One';
+  color: var(--black);
+}
+
+p {
+  font-family: 'Open Sans';
+}
