@@ -19,8 +19,72 @@ body {
 
 h1 {
   font-family: 'Poetsen One';
+  font-weight: lighter;
+}
+
+h2 {
+  font-family: 'Poetsen One';
+  font-weight: lighter;
 }
 
 p {
   font-family: 'Open Sans';
+}
+
+.primary-btn {
+  color: var(--white);
+  font-size: 16px;
+  font-family: 'Poetsen One';
+  font-weight: lighter;
+  padding: 10px 16px;
+  background: var(--green); 
+  border-radius: 25px; 
+  border: 1.5px black solid
+}
+
+.primary-btn:hover {
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.30) inset
+}
+
+.secondary-btn {
+  color: var(--black);
+  font-size: 16px;
+  font-family: 'Poetsen One';
+  font-weight: lighter;
+  padding: 10px 16px;
+  background: var(--orange); 
+  border-radius: 25px; 
+  border: 1.5px black solid
+}
+
+.secondary-btn:hover {
+  box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.30) inset
+}
+
+@media only screen and (min-width: 651px){ 
+
+  h1 { font-size: 40px }
+  p { font-size: 24px }
+
+}
+
+@media only screen and (min-width: 451px) and (max-width: 650px){ 
+
+  h1 { font-size: 40px }
+  p { font-size: 20px }
+
+}
+
+@media only screen and (min-width: 401px) and (max-width: 450px){ 
+
+  h1 { font-size: 9vw }
+  p { font-size: 20px }
+
+}
+
+@media only screen and (max-width: 400px){ 
+
+  h1 { font-size: 10vw }
+  p { font-size: 18px }
+
 }

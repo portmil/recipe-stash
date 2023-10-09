@@ -2,20 +2,50 @@
   --background-white: #FDFDFD;
 }
 
-.landing-background {
+#landing-background-orange {
   background-color: var(--orange);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 40vh;
   width: 100%;
   position: relative;
 }
 
-.landing-ellipse {
+#app-text {
   position: absolute;
-  top: 20vh;
+  top: 10px;
+  left: 50px
+}
+
+#landing-page-graphic {
+  position: absolute;
+  top: 10px
+}
+
+#landing-content {
+  background-color: var(--background-white);
+  position: absolute;
+}
+
+#landing-ellipse-desktop-large {
+  position: absolute;
+  min-height: 80%;
+  top: 250px;
+  width: 100%;
+}
+
+#landing-ellipse-desktop {
+  position: absolute;
+  min-height: 80%;
+  top: 250px;
+  width: 100%;
+}
+
+#landing-ellipse-mobile {
+  position: absolute;
+  min-height: 80%;
+  top: 250px;
   width: 100%;
 }
 
@@ -23,10 +53,134 @@ ellipse {
   fill:#FDFDFD;
 }
 
-.landing-content {
-  background-color: var(--background-white);
-  font-size: calc(10px + 2vmin);
-  padding: 0 4.5vh 0 4.5vh;
-  position: absolute;
-  top: 40vh
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+@media only screen and (min-width: 2001px) { 
+
+  #landing-ellipse-desktop { display: none; }
+  #landing-ellipse-mobile { display: none; }
+
+  #landing-ellipse-desktop-large {
+    min-height: 70%;
+  }
+
+  #landing-background-orange {
+    min-height: 30vw;
+  }
+
+  #landing-content {
+    top: 400px;
+    width: 50%
+  }
+
+  .buttons {
+    gap: 1vw;
+  }
+
+}
+
+@media only screen and (min-width: 1101px) and (max-width: 2000px) { 
+
+  #landing-ellipse-desktop { display: none; }
+  #landing-ellipse-mobile { display: none; }
+
+  #landing-background-orange {
+    min-height: 55vw;
+  }
+
+  #landing-content {
+    top: 400px;
+    width: 50%
+  }
+
+  .buttons {
+    gap: 1vw;
+  }
+
+}
+
+@media only screen and (min-width: 541px) and (max-width: 1100px) { 
+
+  #landing-ellipse-desktop-large { display: none; }
+  #landing-ellipse-mobile { display: none; }
+
+  #landing-background-orange {
+    min-height: 90vw;
+  }
+
+  #landing-content {
+    top: 400px;
+    width: 60%
+  }
+
+  .buttons {
+    gap: 2vw;
+  }
+
+}
+
+@media only screen and (max-width: 540px) { 
+
+  #landing-ellipse-desktop-large { display: none; }
+  #landing-ellipse-desktop { display: none; }
+
+  #landing-background-orange {
+    min-height: 200vw;
+  }
+
+  #landing-content {
+    top: 370px;
+    width: 80%
+  }
+
+  .buttons {
+    gap: 3vw;
+  }
+
+}
+
+@media only screen and (min-width: 401px) and (max-width: 540px){
+
+  #landing-page-graphic { top: 1px; } 
+
+}
+
+@media only screen and (min-width: 351px) and (max-width: 400px) {
+
+  #landing-page-graphic {
+    top: 2%;
+    width: 85%;
+    height: auto;
+  }
+}
+
+@media only screen and (min-width: 325px) and (max-width: 350px) {
+
+  #landing-page-graphic {
+    top: 3%;
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 325px) {
+
+  #landing-page-graphic {
+    top: 6%;
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+
+  #app-text {
+    display: none;
+  }
 }
