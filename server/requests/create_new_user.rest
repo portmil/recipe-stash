@@ -1,0 +1,8 @@
+POST http://localhost:3005/api/users
+content-type: application/json
+
+{
+  "name": "Root",
+  "email": "superuser@email.com",
+  "password": "salasana"
+}
