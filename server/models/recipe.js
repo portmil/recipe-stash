@@ -7,7 +7,7 @@ const recipeSchema = new mongoose.Schema({
   rating: { type: Number, min: 1, max: 5 },
   lastMakingDate: { type: Date },
   // categories: [{ type: ObjectId, ref: 'Category' }],
-  // userId: { type: ObjectId, ref: 'User' }
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
 recipeSchema.set('toJSON', {
