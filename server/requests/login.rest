@@ -1,0 +1,7 @@
+POST http://localhost:3005/api/login
+content-type: application/json
+
+{
+  "email": "superuser@email.com",
+  "password": "salasana"
+}

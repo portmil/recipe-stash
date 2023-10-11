@@ -1,0 +1,7 @@
+POST http://localhost:3005/api/recipes
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN1cGVydXNlckBlbWFpbC5jb20iLCJpZCI6IjY1MjQyNGZiYzc1YWIwNzVjYzYyZDE3YyIsImlhdCI6MTY5Njg2ODM3MX0.ReVNAwd922Ah5x523IYpFKlOMr_So2CMtHsDsca78Vw
+
+{
+  "name": "Carrot Soup"
+}
