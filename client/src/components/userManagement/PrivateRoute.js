@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import recipeService from '../../services/recipes';
@@ -7,17 +7,24 @@ const PrivateRoute = ({ children, type }) => {
 
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const { pathname } = useLocation();
 
-  useEffect(() => {
-    // check if user data can be found from local storage
+  const getAuthStatus = () => {
+    // loading set to true so page doesn't load until token has been retrieved
+    setLoading(true);
     const userJSON = localStorage.getItem('user');
 		if (userJSON) {
 			const user = JSON.parse(userJSON);
 			setUser(true);
 			recipeService.setToken(user.token);
 		}
-    setLoading(false);
-  }, []);
+      // token has been retrieved, can load page
+      setLoading(false);
+  };
+
+  useEffect(() => {
+    getAuthStatus();
+  }, [pathname]);
 
   // only load page after user has been retrieved
   if (!loading) {

@@ -1,10 +1,14 @@
 import '../styles/App.css';
 import '../styles/LandingPage.css';
 import landingGraphic from '../graphics/landing_page_graphic.svg';
+import { useNavigate } from "react-router-dom";
 
 const introduction = "Sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam."
 
 const LandingPage = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div className="App">
       <div id="landing-background-orange">
@@ -23,8 +27,8 @@ const LandingPage = () => {
           <h1>Welcome</h1>
           <p>{introduction}</p>
           <div className="buttons">
-            <button className="secondary-btn">LOGIN</button>
-            <button className="primary-btn">SIGN UP</button>
+            <button className="secondary-btn" onClick={()=>navigate("/login")}>LOGIN</button>
+            <button className="primary-btn" onClick={()=>navigate("/signup")}>SIGN UP</button>
           </div>
         </div>
       </div>
