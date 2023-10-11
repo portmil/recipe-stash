@@ -19,7 +19,7 @@ const SignupPage = () => {
 				name, email, password,
 			});
 			localStorage.setItem('user', JSON.stringify(user));
-            navigate('/main');
+            navigate('/main', { replace: true });
 
 		} catch (exception) {
 			setShowError(true);

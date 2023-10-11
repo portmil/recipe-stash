@@ -4,6 +4,7 @@ import PrivateRoute from './components/userManagement/PrivateRoute';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/userManagement/LoginPage';
 import SignupPage from './components/userManagement/SignupPage';
+import MainPage from './components/MainPage';
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
           <Route path='/signup' element={<SignupPage/>}/>
         </Route>
         <Route element={<PrivateRoute type='users'/>}> {/* pages that are only visible to logged users */}
-
+          <Route path='/main' element={<MainPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

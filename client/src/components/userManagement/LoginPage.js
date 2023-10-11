@@ -13,13 +13,12 @@ const LoginPage = () => {
 
     const handleSubmit = async (event) => {
 		event.preventDefault();
-        console.log(email)
 		try {
 			const user = await userService.login({
 				email, password,
 			});
 			localStorage.setItem('user', JSON.stringify(user));
-            navigate('/main');
+            navigate('/main', { replace: true });
 
 		} catch (exception) {
 			setShowError(true);
