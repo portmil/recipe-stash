@@ -6,7 +6,7 @@ import allIcon from '../graphics/all_icon.svg';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
-const MainPage = () => {
+const HomePage = () => {
 
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
@@ -65,4 +65,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default HomePage;
