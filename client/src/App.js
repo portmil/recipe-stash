@@ -10,13 +10,14 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path='/main' element={<MainPage/>}/>
         <Route element={<PrivateRoute type='visitors'/>}> {/* pages that are only visible to non logged users */}
           <Route path='/' element={<LandingPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/signup' element={<SignupPage/>}/>
         </Route>
         <Route element={<PrivateRoute type='users'/>}> {/* pages that are only visible to logged users */}
-          <Route path='/main' element={<MainPage/>}/>
+      
         </Route>
       </Routes>
     </BrowserRouter>
