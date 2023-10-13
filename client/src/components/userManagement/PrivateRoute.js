@@ -46,7 +46,7 @@ const PrivateRoute = ({ children, type }) => {
     } else {
       if(user) {
         // if user is logged in, redirect to main page
-        return <Navigate to='/main' />;
+        return <Navigate to='/home' />;
       } else {
         // if user isn't logged in show the page
         return (

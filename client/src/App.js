@@ -21,14 +21,13 @@ const App = () => {
           <Route path='/signup' element={<SignupPage/>}/>
         </Route>
         <Route element={<PrivateRoute type='users'/>}> {/* pages that are only visible to logged users */}
-        </Route>
-        {/* The NavigationLayout should be moved inside PrivateRoute once it has been tested */}
-        <Route element={<NavigationLayout/>}>
-          <Route path='/home' element={<HomePage/>}/>
-          <Route path='/search' element={<SearchPage/>}/>
-          <Route path='/add-recipe' element={<AddRecipePage/>}/>
-          <Route path='/ranking' element={<RankingPage/>}/>
-          <Route path='/profile' element={<ProfilePage/>}/>
+          <Route element={<NavigationLayout/>}>
+            <Route path='/home' element={<HomePage/>}/>
+            <Route path='/search' element={<SearchPage/>}/>
+            <Route path='/add-recipe' element={<AddRecipePage/>}/>
+            <Route path='/ranking' element={<RankingPage/>}/>
+            <Route path='/profile' element={<ProfilePage/>}/>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
