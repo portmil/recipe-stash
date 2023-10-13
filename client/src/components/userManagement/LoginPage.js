@@ -18,7 +18,7 @@ const LoginPage = () => {
 				email, password,
 			});
 			localStorage.setItem('user', JSON.stringify(user));
-            navigate('/main', { replace: true });
+            navigate('/home', { replace: true });
 
 		} catch (exception) {
 			setShowError(true);

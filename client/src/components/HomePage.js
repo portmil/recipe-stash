@@ -1,7 +1,7 @@
 import '../styles/App.css';
 import { useNavigate } from 'react-router-dom';
 
-const MainPage = () => {
+const HomePage = () => {
 
     const navigate = useNavigate();
 
@@ -12,9 +12,10 @@ const MainPage = () => {
 
     return (
         <div>
+            <h1>Home</h1>
             <button className="primary-btn" onClick={handleLogout}>LOGOUT</button>
         </div>
     );
 };
 
-export default MainPage;
+export default HomePage;
