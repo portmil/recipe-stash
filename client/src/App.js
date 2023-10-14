@@ -21,7 +21,7 @@ const App = () => {
           <Route path='/signup' element={<SignupPage/>}/>
         </Route>
         <Route element={<PrivateRoute type='users'/>}> {/* pages that are only visible to logged users */}
-          <Route element={<NavigationLayout/>}>
+        <Route element={<NavigationLayout/>}>
             <Route path='/home' element={<HomePage/>}/>
             <Route path='/search' element={<SearchPage/>}/>
             <Route path='/add-recipe' element={<AddRecipePage/>}/>
