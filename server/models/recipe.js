@@ -1,13 +1,21 @@
 const mongoose = require('mongoose')
 
 const recipeSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: [true, "is required"] },
   link: String,
   description: String,
-  rating: { type: Number, min: 1, max: 5 },
+  rating: { // User can enter integer values 1-5, and unrated recipes have 0
+    type: Number,
+    min: 0,
+    max: 5,
+    validate: {
+      validator: Number.isInteger,
+      message: "{VALUE} is not an integer value"
+    }
+  },
   lastMakingDate: { type: Date },
-  // categories: [{ type: ObjectId, ref: 'Category' }],
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Category' }],
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
 recipeSchema.set('toJSON', {
