@@ -52,7 +52,7 @@
   stroke: var(--black);
 }
 
-circle {
+#container circle {
   fill: var(--black);
 }
 
@@ -91,7 +91,7 @@ circle {
     gap: 20px;
   }
 
-  a {
+  #container a {
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -104,28 +104,28 @@ circle {
     color: var(--black);
   }
 
-  a:hover {
+  #container a:hover {
     background-color: var(--background-white);
   }
-  a.active {
+  #container a.active {
     background-color: var(--background-white);
   }
-  a:hover svg {
+  #container a:hover svg {
     fill: var(--orange);
   }
-  a.active svg {
+  #container a.active svg {
     fill: var(--orange);
   }
-  a svg {
+  #container a svg {
     fill: var(--white);
   }
 
-  p {
+  #nav-bar-desktop p {
     font-size: 22px;
     font-weight: 600;
     margin: 0
   }
-  h2 {
+  #nav-bar-desktop h2 {
     margin-left: 10px
   }
 
@@ -146,7 +146,7 @@ circle {
     display: none;
   }
     
-  a.active svg {
+  #container a.active svg {
     fill: var(--white);
   }
 

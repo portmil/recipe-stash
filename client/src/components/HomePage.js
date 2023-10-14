@@ -3,6 +3,7 @@ import '../styles/HomePage.css';
 import homeGraphic from '../graphics/home_page_graphic.svg';
 import sortIcon from '../graphics/sort_icon.svg';
 import allIcon from '../graphics/all_icon.svg';
+import { ReactComponent as StarIcon } from '../graphics/star_icon.svg';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
@@ -10,20 +11,61 @@ const HomePage = () => {
 
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
+    const [recipes, setRecipes] = useState([]);
     const [activeCategory, setActiveCategory] = useState('All');
 
     useEffect (() => {
-    // get categories from backend
+        // get categories from backend and replace mock data
+        setCategories([{icon: 'all_icon', name: 'All'}, {icon: 'breakfast_icon', name: 'Breakfast'}])
 
-    // get all recipes from backend
+        // get all recipes from backend and replace mock data
+        setRecipes([{id: '1', name: 'Spaghetti bolognese', rating: 3}, {id: '2', name: 'Lentil Soup', rating: 0}])
     }, []);
 
-    // MOVE TO USER PAGE
-    /*const handleLogout = () => {
-		window.localStorage.removeItem('user');
-		navigate(0, { replace: true });
-	};*/
-    //<button className="primary-btn" onClick={handleLogout}>LOGOUT</button>
+    const createCategoryCard = (category) => {
+
+        return (
+            <div className='category-card'>
+                <button
+                    className={activeCategory === category.name ? 'icon-background active' : 'icon-background'}
+                    onClick={() => setActiveCategory(category.name)}
+                    key={ category.name }
+                >
+                    <img
+                        className={activeCategory === category.name ? 'category-icon active' : 'category-icon'}
+                        src={require(`../graphics/${category.icon}.svg`)}
+                        alt='Icon for all'
+                    />
+                </button>
+                <p className='category-text'>{category.name}</p>
+            </div>
+        )
+    }
+
+    const createRecipeCard = (recipe) => {
+        // convert recipe star rating to an array
+        const starArr = [];
+        for(let i = 0; i < recipe.rating; i++) {
+            starArr.push(<StarIcon key={`${recipe.id}-${i}`} className='star-icon filled'/>);
+        }    
+        for(let i=recipe.rating; i<5; i++) {
+            starArr.push(<StarIcon key={`${recipe.id}-${i}`} className={recipe.rating === 0 ? 'star-icon faded': 'star-icon'}/>);
+        }
+
+        return (
+            <div className='recipe-card' onClick={() => navigate(`/${recipe.id}`)}>
+                <div className='recipe-icon-container'>
+                    <img className='recipe-icon' src={allIcon} alt='Icon for all'/>
+                </div>
+                <div className='recipe-text-container'>
+                    <p>{recipe.name}</p>
+                    <div className='star-container'>
+                        {starArr}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     const headerText = 'Start \n Cooking'
 
@@ -35,19 +77,7 @@ const HomePage = () => {
             </div>
             <h2>Categories</h2>
             <div className='categories-container'>
-                <div className='category-card'>
-                    <button className='icon-background active'>
-                        <img className='category-icon active' src={allIcon} alt='Icon for all'/>
-                    </button>
-                    <p className='category-text'>All</p>
-                </div>
-                <div className='category-card'>
-                    <button className='icon-background'>
-                        <img className='category-icon' src={allIcon} alt='Icon for all'/>
-                    </button>
-                    <p className='category-text'>All</p>
-                </div>
-
+                {categories.map(category => createCategoryCard(category))}
             </div>
             <div className='header-container'>
                 <h2>Recipes</h2>
@@ -56,9 +86,7 @@ const HomePage = () => {
                 </button>
             </div>
             <div className='recipe-container'>
-                <div className='recipe-card'>
-                    <p>text</p>
-                </div>
+                {recipes.map(recipe => createRecipeCard(recipe))}
             </div>
             
         </div>
