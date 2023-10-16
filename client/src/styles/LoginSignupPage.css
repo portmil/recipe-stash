@@ -1,19 +1,23 @@
 #login-signup-header {
-    margin-top: 120px;
-    margin-bottom: 60px;
-    align-self: center;
+  margin-top: 120px;
+  margin-bottom: 60px;
+  align-self: center;
 }
 
 .user-form {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  align-items: center;
 }
 
-.form-error{
-    font-size: 16px;
-    margin-bottom: 30px;
-    margin-top: 0px;
-    color: var(--red);
+.user-form label {
+  transition: .3s;
+}
+
+.form-error {
+  font-size: 16px;
+  margin-bottom: 30px;
+  margin-top: 0px;
+  color: var(--red);
 }

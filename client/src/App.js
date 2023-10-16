@@ -10,6 +10,7 @@ import AddRecipePage from './components/AddRecipePage';
 import RankingPage from './components/RankingPage';
 import ProfilePage from './components/ProfilePage';
 import NavigationLayout from './components/NavigationLayout';
+import React from 'react';
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
           <Route path='/signup' element={<SignupPage/>}/>
         </Route>
         <Route element={<PrivateRoute type='users'/>}> {/* pages that are only visible to logged users */}
-        <Route element={<NavigationLayout/>}>
+          <Route element={<NavigationLayout/>}>
             <Route path='/home' element={<HomePage/>}/>
             <Route path='/search' element={<SearchPage/>}/>
             <Route path='/add-recipe' element={<AddRecipePage/>}/>
@@ -32,6 +33,6 @@ const App = () => {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;
