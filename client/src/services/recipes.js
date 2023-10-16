@@ -1,12 +1,15 @@
-import axios from './axios';
+/* eslint-disable no-unused-vars */
 
 let token = null;
 
+/* eslint-enable no-unused-vars */
+
 const setToken = (newToken) => {
-	token = `Bearer ${newToken}`;
+  token = `Bearer ${newToken}`;
 };
 
 const recipeService = {
-	setToken,
+  setToken,
 };
+
 export default recipeService;

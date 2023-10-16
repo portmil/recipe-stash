@@ -1,7 +1,9 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
 import { useState, useEffect } from 'react';
 import recipeService from '../../services/recipes';
+import React from 'react';
 
 const PrivateRoute = ({ children, type }) => {
 
@@ -13,13 +15,13 @@ const PrivateRoute = ({ children, type }) => {
     // loading set to true so page doesn't load until token has been retrieved
     setLoading(true);
     const userJSON = localStorage.getItem('user');
-		if (userJSON) {
-			const user = JSON.parse(userJSON);
-			setUser(true);
-			recipeService.setToken(user.token);
-		}
-      // token has been retrieved, can load page
-      setLoading(false);
+    if (userJSON) {
+      const user = JSON.parse(userJSON);
+      setUser(true);
+      recipeService.setToken(user.token);
+    }
+    // token has been retrieved, can load page
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -33,16 +35,16 @@ const PrivateRoute = ({ children, type }) => {
       // load page id user is logged in
       if(user) {
         return (
-            <>
-              {children}
-              <Outlet />
-            </>
-          );
+          <>
+            {children}
+            <Outlet />
+          </>
+        );
       } else {
         // if user isn't logged in, redirect to landing page
         return <Navigate to='/' />;
       }
-    // if page should be only visible to visitors
+      // if page should be only visible to visitors
     } else {
       if(user) {
         // if user is logged in, redirect to main page
@@ -59,6 +61,11 @@ const PrivateRoute = ({ children, type }) => {
 
     }
   }
+};
+
+PrivateRoute.propTypes = {
+  children: PropTypes.array,
+  type: PropTypes.string,
 };
 
 export default PrivateRoute;
