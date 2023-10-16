@@ -25,7 +25,7 @@ const HomePage = () => {
   const createCategoryCard = (category) => {
 
     return (
-      <div className='category-card'>
+      <div key={category.name} className='category-card'>
         <button
           className={activeCategory === category.name ? 'icon-background active' : 'icon-background'}
           onClick={() => setActiveCategory(category.name)}
@@ -53,7 +53,7 @@ const HomePage = () => {
     }
 
     return (
-      <div className='recipe-card' onClick={() => navigate(`/${recipe.id}`)}>
+      <div key={recipe.id} className='recipe-card' onClick={() => navigate(`/${recipe.id}`)}>
         <div className='recipe-icon-container'>
           <img className='recipe-icon' src={allIcon} alt='Icon for all'/>
         </div>
