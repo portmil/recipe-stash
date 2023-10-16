@@ -48,17 +48,25 @@ recipesRouter.post('/', async (request, response, next) => {
     link,
     description,
     rating: rating || 0,
-    lastMakingDate,
+    lastMakingDate: lastMakingDate || new Date(0),
     userId: user._id
   })
 
   // The format of the data is validated by Mongoose's validation
   // functionality as specified in the recipe schema
   try {
+    // Add the new recipe to the "All" category of the user
+    const allCat = await Category.findOne({userId: user.id, name: 'All'})
+    recipe.categories = [allCat._id]
     const savedRecipe = await recipe.save()
+    allCat.unrankedRecipes = allCat.unrankedRecipes.concat(savedRecipe._id)
+    await allCat.save()
+
     user.recipes = user.recipes.concat(savedRecipe._id)
     await user.save()
+
     response.status(201).json(savedRecipe)
+
   } catch (error) {
     next(error) // give error to error handler middleware
   }

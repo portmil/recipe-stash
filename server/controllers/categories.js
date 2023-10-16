@@ -16,7 +16,7 @@ categoriesRouter.get('/', async (request, response) => {
 
 
 categoriesRouter.post('/', async (request, response, next) => {
-  const { name } = request.body
+  const { name, icon } = request.body
   const user = request.user
 
   if (!user) {
@@ -25,6 +25,8 @@ categoriesRouter.post('/', async (request, response, next) => {
 
   const category = new Category({
     name,
+    icon: icon || 'all_icon',
+    isDefault: false,
     userId: user._id
   })
 
@@ -50,6 +52,9 @@ categoriesRouter.delete('/:id', async (request, response, next) => {
     if (!user || category.userId.toString() !== user.id.toString()) {
       return response.status(401).json({ error: 'invalid user' })
     }
+    if (category.isDefault) {
+      return response.status(405).json({ error: 'cannot delete default categories' })
+    } // status code 405 = Method Not Allowed
 
     await Category.findByIdAndRemove(idToDelete)
 
@@ -86,8 +91,9 @@ categoriesRouter.patch('/:id/:recipeId', async (request, response, next) => {
     if (!user || category.userId.toString() !== user.id.toString() || category.userId.toString() !== recipe.userId.toString()) {
       return response.status(401).json({ error: 'invalid user' })
     }
-    if (category.unrankedRecipes.map(r => r.toString()).includes(recipeId)) {
-      return response.status(400).json({ error: 'the recipe has already been added to this category' })
+    const recipesInCategory = category.unrankedRecipes.concat(category.rankedRecipes)
+    if (recipesInCategory.map(r => r.toString()).includes(recipeId)) {
+      return response.status(405).json({ error: 'the recipe has already been added to this category' })
     }
     
     // All checks pass -> add the recipe to the category
@@ -112,6 +118,9 @@ categoriesRouter.delete('/:id/:recipeId', async (request, response, next) => {
     const category = await Category.findById(id)
     if (!category) {
       return response.status(404).json({ error: 'category not found' })
+    }
+    if (category.name === 'All') {
+      return response.status(405).json({ error: 'cannot remove recipes from the category \'All\'' })
     }
     const recipe = await Recipe.findById(recipeId)
     if (!recipe) {
