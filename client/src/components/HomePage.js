@@ -2,7 +2,6 @@ import '../styles/App.css';
 import '../styles/HomePage.css';
 import homeGraphic from '../graphics/home_page_graphic.svg';
 import sortIcon from '../graphics/sort_icon.svg';
-import allIcon from '../graphics/all_icon.svg';
 import { ReactComponent as StarIcon } from '../graphics/star_icon.svg';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
@@ -55,10 +54,13 @@ const HomePage = () => {
       starArr.push(<StarIcon key={`${recipe.id}-${i}`} className={recipe.rating === 0 ? 'star-icon faded': 'star-icon'}/>);
     }
 
+    // if recipe belongs to multiple categories, use the icon of the first one other than 'All'
+    const icon = recipe.categories.length > 1 ? recipe.categories[1].icon : 'all_icon';
+
     return (
       <div key={recipe.id} className='recipe-card' onClick={() => navigate(`/${recipe.id}`)}>
         <div className='recipe-icon-container'>
-          <img className='recipe-icon' src={allIcon} alt='Icon for all'/>
+          <img className='recipe-icon' src={require(`../graphics/${icon}.svg`)} alt='Icon for the category of the recipe'/>
         </div>
         <div className='recipe-text-container'>
           <p>{recipe.name}</p>
