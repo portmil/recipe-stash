@@ -6,6 +6,8 @@ import allIcon from '../graphics/all_icon.svg';
 import { ReactComponent as StarIcon } from '../graphics/star_icon.svg';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import recipeService from '../services/recipes';
+import categoryService from '../services/categories';
 
 const HomePage = () => {
 
@@ -15,11 +17,12 @@ const HomePage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect (() => {
-    // get categories from backend and replace mock data
-    setCategories([{icon: 'all_icon', name: 'All'}, {icon: 'breakfast_icon', name: 'Breakfast'}]);
-
-    // get all recipes from backend and replace mock data
-    setRecipes([{id: '1', name: 'Spaghetti bolognese', rating: 3}, {id: '2', name: 'Lentil Soup', rating: 0}]);
+    recipeService.getAll().then(recipes =>
+      setRecipes(recipes)
+    );
+    categoryService.getAll().then(categories =>
+      setCategories(categories)
+    );
   }, []);
 
   const createCategoryCard = (category) => {
@@ -34,7 +37,7 @@ const HomePage = () => {
           <img
             className={activeCategory === category.name ? 'category-icon active' : 'category-icon'}
             src={require(`../graphics/${category.icon}.svg`)}
-            alt='Icon for all'
+            alt={`Icon for category '${category.name}'`}
           />
         </button>
         <p className='category-text'>{category.name}</p>

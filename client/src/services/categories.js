@@ -1,14 +1,14 @@
 import axios from './axios';
 import userService from '../services/user';
-const baseUrl = '/api/recipes';
+const baseUrl = '/api/categories';
 
 const getAll = async () => {
   const response = await axios.get(baseUrl, userService.getAuthHeader());
   return response.data;
 };
 
-const recipeService = {
+const categoryService = {
   getAll
 };
 
-export default recipeService;
+export default categoryService;
