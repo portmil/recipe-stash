@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { useState, useEffect } from 'react';
-import recipeService from '../../services/recipes';
+import userService from '../../services/user';
 import React from 'react';
 
 const PrivateRoute = ({ children, type }) => {
@@ -18,7 +18,7 @@ const PrivateRoute = ({ children, type }) => {
     if (userJSON) {
       const user = JSON.parse(userJSON);
       setUser(true);
-      recipeService.setToken(user.token);
+      userService.setToken(user.token);
     }
     // token has been retrieved, can load page
     setLoading(false);
