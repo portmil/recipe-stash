@@ -27,6 +27,13 @@ const extraIcons = [
   'cheese_icon.svg',
   'watermelon_icon.svg',
   'egg_icon.svg',
+  'beer_icon.svg',
+  'coctail_icon.svg',
+  'hamburger_icon.svg',
+  'grapes_icon.svg',
+  'carrot_icon.svg',
+  'icecream_icon.svg',
+  'rice_icon.svg'
 ];
 
 const categoryIcons = {
