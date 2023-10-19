@@ -16,12 +16,18 @@ const HomePage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect (() => {
-    recipeService.getAll().then(recipes =>
-      setRecipes(recipes)
-    );
-    categoryService.getAll().then(categories =>
-      setCategories(categories)
-    );
+    // the callback function passed to useEffect() cannot be async, so 
+    // an immediately invoked function expression has to be used instead
+    (async () => {
+      try {
+        const recipes = await recipeService.getAll();
+        setRecipes(recipes);
+        const categories = await categoryService.getAll();
+        setCategories(categories);
+      } catch (error) { // problem connecting to the server
+        console.log(error);
+      }
+    })();
   }, []);
 
   const createCategoryCard = (category) => {
@@ -56,11 +62,12 @@ const HomePage = () => {
 
     // if recipe belongs to multiple categories, use the icon of the first one other than 'All'
     const icon = recipe.categories.length > 1 ? recipe.categories[1].icon : 'all_icon';
+    const iconName = recipe.categories.length > 1 ? recipe.categories[1].name : 'All';
 
     return (
       <div key={recipe.id} className='recipe-card' onClick={() => navigate(`/${recipe.id}`)}>
         <div className='recipe-icon-container'>
-          <img className='recipe-icon' src={require(`../graphics/${icon}.svg`)} alt='Icon for the category of the recipe'/>
+          <img className='recipe-icon' src={require(`../graphics/${icon}.svg`)} alt={`Icon for category '${iconName}'`}/>
         </div>
         <div className='recipe-text-container'>
           <p>{recipe.name}</p>
