@@ -15,8 +15,11 @@ const SignupPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const user = await userService.signup({
+      await userService.signup({
         name, email, password,
+      });
+      const user = await userService.login({
+        email, password,
       });
       localStorage.setItem('user', JSON.stringify(user));
       navigate('/home', { replace: true });

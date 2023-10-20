@@ -2,10 +2,11 @@ import '../styles/App.css';
 import '../styles/HomePage.css';
 import homeGraphic from '../graphics/home_page_graphic.svg';
 import sortIcon from '../graphics/sort_icon.svg';
-import allIcon from '../graphics/all_icon.svg';
 import { ReactComponent as StarIcon } from '../graphics/star_icon.svg';
 import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import recipeService from '../services/recipes';
+import categoryService from '../services/categories';
 
 const HomePage = () => {
 
@@ -15,11 +16,18 @@ const HomePage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect (() => {
-    // get categories from backend and replace mock data
-    setCategories([{icon: 'all_icon', name: 'All'}, {icon: 'breakfast_icon', name: 'Breakfast'}]);
-
-    // get all recipes from backend and replace mock data
-    setRecipes([{id: '1', name: 'Spaghetti bolognese', rating: 3}, {id: '2', name: 'Lentil Soup', rating: 0}]);
+    // the callback function passed to useEffect() cannot be async, so 
+    // an immediately invoked function expression has to be used instead
+    (async () => {
+      try {
+        const recipes = await recipeService.getAll();
+        setRecipes(recipes);
+        const categories = await categoryService.getAll();
+        setCategories(categories);
+      } catch (error) { // problem connecting to the server
+        console.log(error);
+      }
+    })();
   }, []);
 
   const createCategoryCard = (category) => {
@@ -34,7 +42,7 @@ const HomePage = () => {
           <img
             className={activeCategory === category.name ? 'category-icon active' : 'category-icon'}
             src={require(`../graphics/${category.icon}.svg`)}
-            alt='Icon for all'
+            alt={`Icon for category '${category.name}'`}
           />
         </button>
         <p className='category-text'>{category.name}</p>
@@ -52,10 +60,14 @@ const HomePage = () => {
       starArr.push(<StarIcon key={`${recipe.id}-${i}`} className={recipe.rating === 0 ? 'star-icon faded': 'star-icon'}/>);
     }
 
+    // if recipe belongs to multiple categories, use the icon of the first one other than 'All'
+    const icon = recipe.categories.length > 1 ? recipe.categories[1].icon : 'all_icon';
+    const iconName = recipe.categories.length > 1 ? recipe.categories[1].name : 'All';
+
     return (
       <div key={recipe.id} className='recipe-card' onClick={() => navigate(`/${recipe.id}`)}>
         <div className='recipe-icon-container'>
-          <img className='recipe-icon' src={allIcon} alt='Icon for all'/>
+          <img className='recipe-icon' src={require(`../graphics/${icon}.svg`)} alt={`Icon for category '${iconName}'`}/>
         </div>
         <div className='recipe-text-container'>
           <p>{recipe.name}</p>
