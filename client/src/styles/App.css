@@ -101,6 +101,14 @@ p {
   font-size:16px;
 }
 
+.outline-input {
+  border-radius: 25px; 
+  border: 2px black solid;
+  padding: 10px 18px;
+  font-size: 18px;
+  font-family: 'Open Sans'; 
+}
+
 @media only screen and (min-width: 651px){ 
 
   h1 { font-size: 40px }
