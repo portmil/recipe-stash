@@ -11,6 +11,7 @@ recipesRouter.get('/', async (request, response) => {
 
   const recipes = await Recipe
     .find({userId : user.id}) // users can view only their own recipes
+    .populate('categories', { name: 1, icon: 1 }) // include the id, name, and icon of a category
   response.json(recipes)
 })
 
