@@ -15,6 +15,9 @@ const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
 
+  // Filtering recipes based on category
+  const recipesToShow = recipes.filter(r => r.categories.map(cat => cat.name).includes(activeCategory));
+
   useEffect (() => {
     // the callback function passed to useEffect() cannot be async, so 
     // an immediately invoked function expression has to be used instead
@@ -98,7 +101,7 @@ const HomePage = () => {
         </button>
       </div>
       <div className='recipe-container'>
-        {recipes.map(recipe => createRecipeCard(recipe))}
+        {recipesToShow.map(recipe => createRecipeCard(recipe))}
       </div>
             
     </div>
