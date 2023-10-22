@@ -1,0 +1,103 @@
+.recipe-page-container {
+  margin: 30px;
+}
+
+.icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;;
+}
+.icon-button {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+  border: 2px solid black;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+
+}
+
+.icon {
+  margin: 0 auto;
+  display: block;
+}
+
+.info-container {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 20px;
+  padding-right: 35px;;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.icon-background {
+  cursor:auto;
+}
+.category-card {
+    height: 90px;
+}
+
+.rating-container {
+    width: 75px;
+    padding-top:6px;
+}
+
+.star-rating {
+  width: 25px;
+  height: 25px;
+}
+
+.star-rating.filled {
+    fill: var(--yellow);
+}
+
+.attributes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.attribute-text {
+    font-size: 16px;
+    margin: 0px;
+    margin-bottom: 5px;
+    color: var(--black);
+    font-family: 'Open Sans';
+  }
+
+.primary-btn.cook-now {
+    margin-top: 30px;
+}
+
+.category-container {
+    overflow: scroll;
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .attribute-container {
+    text-align: left;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  .recipe-page-container {
+    margin: 40px 100px;
+    width: 100%;
+  }
+
+  .info-container {
+    justify-content: center;
+    gap: 50px;
+  }   
+}

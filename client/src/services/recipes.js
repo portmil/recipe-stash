@@ -7,8 +7,14 @@ const getAll = async () => {
   return response.data;
 };
 
+const getRecipe = async (id) => {
+  const response = await axios.get(`${baseUrl}/${id}`, userService.getAuthHeader());
+  return response.data;
+};
+
 const recipeService = {
-  getAll
+  getAll,
+  getRecipe
 };
 
 export default recipeService;
