@@ -15,15 +15,20 @@ const RecipePage = () => {
 
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState({});
+  const [error, setError] = useState(false);
 
   useEffect (() => {
     (async () => {
       try {
-        const recipe = await recipeService.getRecipe(id);
+        var recipe = await recipeService.getRecipe(id);
+        // if recipe belongs to multiple categories, drop the category 'All'
+        if (recipe.categories.length > 1) {
+          recipe = { ...recipe, categories: recipe.categories.slice(1) };
+        }
         setRecipe(recipe);
-        console.log(recipe);
-      } catch (error) { // problem connecting to the server
+      } catch (error) {
         console.log(error);
+        setError(true);
       }
     })();
   }, []);
@@ -72,41 +77,67 @@ const RecipePage = () => {
     );
   };
 
+  const createLink = () => {
+    var link = recipe.link;
+    if (!link.includes('https://')) {
+      link = 'https://'+link;
+    }
+    return (
+      <a href={link} target='_blank' rel='noreferrer' className='attribute-text'>{recipe.link}</a>
+    );
+  };
+
+  const showError = () => {
+    setTimeout(() => {
+      navigate('/home');
+    }, '5000');
+    return (
+      <>
+        <p>Error: Recipe could not be found</p>
+        <p>You will be redirected to the home page</p>
+      </>
+    );
+  };
+
   return (
     <div className='App recipe-page-container'>
-      <div className='icon-container'>
-        <button className='icon-button' onClick={() => navigate(-1)} >
-          <BackIcon className='icon'/>
-        </button>
-        <button className='icon-button'>
-          <EditIcon className='icon'/>
-        </button>
-      </div>
-      <div>
-        <h1>{recipe.name}</h1>
-        <div className='info-container'>
-          <div className='category-container'>
-            {recipe.categories && recipe.categories.map(category => createCategoryCard(category))}
+      { error ? showError() :
+        <>
+          <div className='icon-container'>
+            <button className='icon-button' onClick={() => navigate(-1)} >
+              <BackIcon className='icon'/>
+            </button>
+            <button className='icon-button'>
+              <EditIcon className='icon'/>
+            </button>
           </div>
-          {createStars()}
-        </div>
-      </div>
-      <div className='attributes-container'>
-        {recipe.link && 
+          <div>
+            <h1>{recipe.name}</h1>
+            <div className='info-container'>
+              <div className='category-container'>
+                {recipe.categories && recipe.categories.map(category => createCategoryCard(category))}
+              </div>
+              {createStars()}
+            </div>
+          </div>
+          <div className='attributes-container'>
+            {recipe.link && 
         <div className='attribute-container'>
           <h3>Link</h3>
-          <a href={recipe.link} target='_blank' rel='noreferrer' className='attribute-text'>{recipe.link}</a>
+          {createLink()}
         </div>
-        }
-        {recipe.description && 
+            }
+            {recipe.description && 
         <div className='attribute-container'>
           <h3>Description</h3>
           <p className='attribute-text'>{recipe.description}</p>
         </div>
-        }
-        {Date(recipe.lastMakingDate) !== Date(0) && createCookingDate()}
-      </div>
-      <button className='primary-btn cook-now'>COOK NOW</button>
+            }
+            {Date(recipe.lastMakingDate) !== Date(0) && createCookingDate()}
+          </div>
+          <button className='primary-btn cook-now'>COOK NOW</button>
+        </>
+      }
     </div>
   );
 };
