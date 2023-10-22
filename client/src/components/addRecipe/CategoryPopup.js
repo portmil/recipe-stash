@@ -3,28 +3,40 @@ import '../../styles/AddRecipePage.css';
 import '../../styles/Popup.css';
 import React, { useState } from 'react';
 import categoryIcons from '../../graphics/categoryIcons.js';
-import CategoryIcon from '../category/CategoryIcon';
+import CategoryIcon from './CategoryIcon';
 import PropTypes from 'prop-types';
 import Popup from 'reactjs-popup';
 
+/* Get the extra category icons and append them with names.
+   Create the names from the category icons' names: cheese_icon.svg -> Cheese
+*/
 const getExtraIcons = () => {
   const extraIcons = categoryIcons.extraIcons;
   try {
     return extraIcons.map(icon => {
-      return {name: (icon[0].toUpperCase() + icon.slice(1)).split('_icon.svg')[0].replace('_', ' '), icon: icon.split('.svg')[0]};
+      return {
+        name: (icon[0].toUpperCase() + icon.slice(1)).split('_icon.svg')[0].replace('_', ' '), 
+        icon: icon.split('.svg')[0]};
     });
   } catch (error) {
     console.log(`There was an error retrieving extra category icons: ${error}`);
   }
 };
 
-const CategoryPopup = ({ categories, setCategories, currentCategories }) => {
+/* Component to create a new category */
+
+const CategoryPopup = ({ 
+  currentCategories,
+  addedCategories, 
+  setAddedCategories,
+  newCategories, 
+  setNewCategories }) => {
 
   const extraIconsWithNames = getExtraIcons();
 
   const [newCategoryName, setNewCategoryName] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedIcon, setSelectedIcon] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -36,6 +48,9 @@ const CategoryPopup = ({ categories, setCategories, currentCategories }) => {
     setIsDropdownOpen(false);
   };
 
+  /* Handle pressing the 'confirm' button. 
+     Return true if the adding of a category is successful and the popup should be closed, 
+     and return false if the pop up should not be closed */
   const handleAddCategory = () => {
     if (newCategoryName.length === 0) {
       setErrorMessage('Give a name for the new category');
@@ -47,16 +62,20 @@ const CategoryPopup = ({ categories, setCategories, currentCategories }) => {
       setShowError(true);
       return false;
     }
-    if (categories.find(object => object.name === newCategoryName)) {
+    if (addedCategories.find(object => object.name === newCategoryName)) {
       setErrorMessage('You have already specified a new category with this name');
       setShowError(true);
       return false;
     }
+    /* Set the new category name as the text field's input value,
+       but get the icon from the selectedIcon
+    */
     const newCategory = {
       name: newCategoryName,
       icon: selectedIcon ? selectedIcon.icon : null,
     };
-    setCategories([...categories, newCategory]);
+    setAddedCategories([...addedCategories, newCategory]);
+    setNewCategories([...newCategories, newCategory]);
     clearPopup();
     return true;
   };
@@ -70,7 +89,8 @@ const CategoryPopup = ({ categories, setCategories, currentCategories }) => {
   };
 
   return (
-    <Popup trigger={ <button id='add-category-btn' onClick={(event) => event.preventDefault()}>+ Add new category</button> } modal nested>
+    <Popup trigger={ <button type='button' id='add-category-btn' 
+      onClick={(event) => event.preventDefault()}>+ Add new category</button> } modal nested>
       { close => (
         <div className='modal'>
           <div className='content'>
@@ -83,10 +103,15 @@ const CategoryPopup = ({ categories, setCategories, currentCategories }) => {
               </div>
               <div className="dropdown">
                 <div className='outline-input-container'>
-                  <select className='popup-outline-input-container' id='category-icon' onClick={toggleDropdown}>
+                  <select className='popup-outline-input-container' id='category-icon' 
+                    onClick={toggleDropdown}>
+                    {/* This option is not a real option, but it is used to define 
+                        the drop down menu's label. A select element is used to provide 
+                        the drop down menu the same style as a select element */}
                     <option value="" hidden>{selectedIcon ? selectedIcon.name : 'Select an icon'}</option>
                   </select>
                 </div>
+                {/* The actual drop down menu: */}
                 <ul className={`dropdown-menu ${isDropdownOpen ? 'open' : ''}`}>
                   { extraIconsWithNames.map((icon, index) => {
                     return (
@@ -101,17 +126,17 @@ const CategoryPopup = ({ categories, setCategories, currentCategories }) => {
                   <CategoryIcon category={selectedIcon} width={25}/>
                 </div>
               }
-              {showError && <p className='form-error'>{errorMessage}</p>}
-              <button id='confirm-btn-popup'
-                className='primary-btn' onClick={(event) =>  {
+              { showError && <p className='form-error'>{errorMessage}</p> }
+              <button type='button' id='confirm-btn-popup' className='primary-btn' 
+                onClick={(event) =>  {
                   const closePopup = handleAddCategory(event);
                   if (closePopup) close();
                 }}>
                 CONFIRM
               </button>
-              <button className='secondary-btn' onClick={() => {
+              <button type='button' className='secondary-btn' onClick={() => {
                 clearPopup();
-                close();  // The pop up can be closed whenever from the 'Cancel' button
+                close();
               }}>
                 CANCEL
               </button>
@@ -124,9 +149,11 @@ const CategoryPopup = ({ categories, setCategories, currentCategories }) => {
 };
 
 CategoryPopup.propTypes = {
-  categories: PropTypes.array,
-  setCategories: PropTypes.func,
-  currentCategories: PropTypes.array
+  addedCategories: PropTypes.array,
+  setAddedCategories: PropTypes.func,
+  currentCategories: PropTypes.array,
+  newCategories: PropTypes.array,
+  setNewCategories: PropTypes.func
 };
 
 export default CategoryPopup;
