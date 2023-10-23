@@ -18,8 +18,8 @@ const AddRecipePage = () => {
   const [description, setDescription] = useState('');
   const [cookingDate, setDate] = useState('');
 
-  const [addedCategories, setAddedCategories] = useState([]); // Specified categories
-  const [newCategories, setNewCategories] = useState([]);     // New categories
+  /* Specified categories for the recipe, including new catgeories */
+  const [addedCategories, setAddedCategories] = useState([]);
 
   const [dateType, setDateType] = useState('text');
   const [showError, setShowError] = useState(false);
@@ -38,6 +38,7 @@ const AddRecipePage = () => {
 
   /* Create the new categories */
   const createCategories = async () => {
+    const newCategories = addedCategories.filter((object) => !object.id);
     for (let i = 0; i < newCategories.length; i++) {
       await categoryService.addCategory(newCategories[i]);
     }
@@ -112,8 +113,9 @@ const AddRecipePage = () => {
               </div>
             </div>
             <CategorySelection 
-              addedCategories={addedCategories} setAddedCategories={setAddedCategories} 
-              newCategories={newCategories} setNewCategories={setNewCategories}/>
+              addedCategories={addedCategories} 
+              setAddedCategories={setAddedCategories}
+            />
           </div>
           <div className='end-form-container'>
             <textarea className='outline-input' id="description" name="description" 

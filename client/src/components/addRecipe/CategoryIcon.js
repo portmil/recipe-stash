@@ -13,7 +13,7 @@ const CategoryIcon = ({ category, width }) => {
   return (
     <div className='category-icon-background'>
       <img 
-        style={{ width: width }}
+        style={{ width: width, maxHeight: 30 }}
         src={require(`../../graphics/${categoryIcon}.svg`)} 
         alt={`Icon for category '${category.name}'`}
       />

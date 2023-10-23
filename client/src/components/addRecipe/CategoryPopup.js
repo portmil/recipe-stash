@@ -28,9 +28,7 @@ const getExtraIcons = () => {
 const CategoryPopup = ({ 
   currentCategories,
   addedCategories, 
-  setAddedCategories,
-  newCategories, 
-  setNewCategories }) => {
+  setAddedCategories }) => {
 
   const extraIconsWithNames = getExtraIcons();
 
@@ -75,7 +73,6 @@ const CategoryPopup = ({
       icon: selectedIcon ? selectedIcon.icon : null,
     };
     setAddedCategories([...addedCategories, newCategory]);
-    setNewCategories([...newCategories, newCategory]);
     clearPopup();
     return true;
   };
@@ -151,9 +148,7 @@ const CategoryPopup = ({
 CategoryPopup.propTypes = {
   addedCategories: PropTypes.array,
   setAddedCategories: PropTypes.func,
-  currentCategories: PropTypes.array,
-  newCategories: PropTypes.array,
-  setNewCategories: PropTypes.func
+  currentCategories: PropTypes.array
 };
 
 export default CategoryPopup;
