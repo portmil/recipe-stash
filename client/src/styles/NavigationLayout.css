@@ -22,7 +22,7 @@
   gap: 25px;
   left: 0;
   top: 0;
-  min-height: 100vh;
+  height: max(100vh, 100%);
   background-color: var(--orange);
   border: var(--black);
   padding: 18px 25px;

@@ -29,10 +29,16 @@ const AddRecipePage = () => {
      When it is clicked the first time, the type changes to 'date'. */
   const handleDateFocus = () => {
     setDateType('date');
-    if (!cookingDate) {
+    /* If the input is pressed when there is a placeholder, default to today */
+    if (!cookingDate && dateType === 'text') {
       const today = new Date();
       const formattedDate = today.toISOString().slice(0, 10);
       setDate(formattedDate);
+    }
+    /* If the input is cleared, set the placeholder back */
+    if (!cookingDate && dateType === 'date') {
+      setDateType('text');
+      setDate('');
     }
   };
 
@@ -47,6 +53,7 @@ const AddRecipePage = () => {
   /* Create the recipe */
   const addRecipe = async () => {
     const recipe = { name, link, description, lastMakingDate: cookingDate, cookingTime };
+    console.log(recipe);
     const response = await recipeService.addRecipe(recipe);
     return response;
   };
@@ -79,7 +86,7 @@ const AddRecipePage = () => {
   };
 
   return (
-    <div className='App' >
+    <div className='App' id='add-recipe-container'>
       <form className='add-recipe-form' onSubmit={handleSubmit}>
         <h1 id='add-recipe-header'>Add Recipe</h1>
         {showError && <p className='add-recipe-form-error'>{errorMessage}</p>}

@@ -8,6 +8,11 @@
   --background-white: #FDFDFD;
 }
 
+#add-recipe-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Form layout: */
 #add-recipe-header {
   margin-top: 60px;
@@ -17,6 +22,8 @@
 .add-recipe-form {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  align-self: center;
   gap: 25px;
 }
 
@@ -90,6 +97,10 @@
   gap: 15px;
 }
 
+.outline-input-container {
+  width: 260px;
+}
+
 #category {
   width: 260px;
 }
@@ -121,8 +132,9 @@
 }
 
 .category-info p {
-  max-width: 148px;
+  max-width: 150px;
   text-align: left;
+  word-wrap: break-word;
 }
 
 /* Category icon styles: */
@@ -271,20 +283,11 @@
 /* Form layout for desktop */
 
 @media only screen and (min-width: 1025px) { 
- 
-  #add-recipe-header {
-    align-self: left;
-  }
-
-  .add-recipe-form {
-    align-items: flex-start;
-    margin-left: 80px;
-  }
 
   .input-container{
     display: flex;
     flex-direction: row;
-    gap: 50px;
+    gap: 60px;
     align-items: flex-start;
   }
 
@@ -302,18 +305,17 @@
 
 /* Form layout for tablet */
 
-@media only screen and (min-width: 651px) and (max-width: 1024px){ 
-
-  #add-recipe-header {
-    align-self: left;
-  }
-
-  .add-recipe-form {
-    align-items: center;
-  }
+@media only screen and (min-width: 751px) and (max-width: 1024px){ 
 
   .button-container {
     margin-top: 25px;
+  }
+
+  .input-container{
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+    align-items: flex-start;
   }
 
   #description {
@@ -324,39 +326,9 @@
 
 }
 
-@media only screen and (min-width: 701px) and (max-width: 1024px){ 
-
-  .input-container{
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    align-items: flex-start;
-  }
-
-}
-
-@media only screen and (min-width: 651px) and (max-width: 700px){ 
-
-  .input-container{
-    display: flex;
-    flex-direction: row;
-    gap: 27px;
-    align-items: flex-start;
-  }
-
-}
-
 /* Form layout for mobile */
 
-@media only screen and (max-width: 650px){ 
-
-  #add-recipe-header {
-    align-self: center;
-  }
-
-  .add-recipe-form {
-    align-items: center;
-  }
+@media only screen and (max-width: 750px){ 
 
   .input-container {
     display: flex;

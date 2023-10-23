@@ -93,15 +93,15 @@ const CategoryPopup = ({
           <div className='content'>
             <div className='popup-container'>
               <div className='popup-line-input-container'>
-                <input type='text' name='name' placeholder=' ' id='name'
+                <input type='text' name='category-name' placeholder=' ' id='category-name'
+                  maxLength={14}
                   onChange={({ target }) => setNewCategoryName(target.value)}>
                 </input>
-                <label htmlFor='name'>Category name</label>
+                <label htmlFor='category-name'>Category name</label>
               </div>
               <div className="dropdown">
-                <div className='outline-input-container'>
-                  <select className='popup-outline-input-container' id='category-icon' 
-                    onClick={toggleDropdown}>
+                <div className='popup-outline-input-container'>
+                  <select id='category-icon' onClick={toggleDropdown}>
                     {/* This option is not a real option, but it is used to define 
                         the drop down menu's label. A select element is used to provide 
                         the drop down menu the same style as a select element */}
