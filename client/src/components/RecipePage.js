@@ -37,7 +37,7 @@ const RecipePage = () => {
     return (
       <div key={category.name} className='category-card'>
         <button
-          className={'icon-background active'}
+          className={'icon-background active no-pointer'}
           key={ category.name }
         >
           <img
@@ -46,19 +46,21 @@ const RecipePage = () => {
             alt={`Icon for category '${category.name}'`}
           />
         </button>
-        <p className='category-text'>{category.name}</p>
+        <p className='category-text recipe-page'>{category.name}</p>
       </div>
     );
   };
 
   const createCookingDate = () => {
-    const date = new Date(recipe.lastMakingDate);
-    return (
-      <div className='attribute-container'>
-        <h3>Cooking date</h3>
-        <p className='attribute-text'>{date.toLocaleDateString().replaceAll('/', '.')}</p>
-      </div>
-    );
+    const date = new Date(recipe.lastMakingDate).toLocaleDateString();
+    if (date !== new Date(0).toLocaleDateString()) {
+      return (
+        <div className='attribute-container'>
+          <h3>Cooking date</h3>
+          <p className='attribute-text'>{date.replaceAll('/', '.')}</p>
+        </div>
+      );
+    }
   };
 
   const createStars = () => {
@@ -72,7 +74,7 @@ const RecipePage = () => {
     return (
       <div className='rating-container'>
         {starArr}
-        <p className='category-text'>{`${recipe.rating}/5`}</p>
+        <p className='category-text recipe-page'>{`${recipe.rating}/5`}</p>
       </div>
     );
   };
@@ -122,18 +124,21 @@ const RecipePage = () => {
           </div>
           <div className='attributes-container'>
             {recipe.link && 
-        <div className='attribute-container'>
-          <h3>Link</h3>
-          {createLink()}
-        </div>
-            }
+              <div className='attribute-container'>
+                <h3>Link</h3>
+                {createLink()}
+              </div>}
+            {recipe.cookingTime && 
+              <div className='attribute-container'>
+                <h3>Cooking time</h3>
+                <p className='attribute-text'>{recipe.cookingTimen} minutes</p>
+              </div>}
             {recipe.description && 
-        <div className='attribute-container'>
-          <h3>Description</h3>
-          <p className='attribute-text'>{recipe.description}</p>
-        </div>
-            }
-            {Date(recipe.lastMakingDate) !== Date(0) && createCookingDate()}
+              <div className='attribute-container'>
+                <h3>Description</h3>
+                <p className='attribute-text'>{recipe.description}</p>
+              </div>}
+            {createCookingDate()}
           </div>
           <button className='primary-btn cook-now'>COOK NOW</button>
         </>
