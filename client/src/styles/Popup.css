@@ -1,0 +1,91 @@
+:root {
+  --red: #9F072B;
+}
+
+.popup-overlay {
+  background-color: rgba(145.56, 145.56, 145.56, 0.74);
+}
+    
+.content {
+  background-color: #FFFFFF;
+  border-radius: 40px;
+  padding: 30px;
+  min-width: 200px;
+}
+
+.popup-container {
+  margin: 30px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+}
+
+.popup-line-input-container {
+  position:relative;
+  margin-bottom:10px;
+  width: 180px;
+}
+
+.popup-line-input-container input {
+  border:0;
+  border-bottom:1px solid #555;  
+  background:transparent;
+  width:100%;
+  padding:8px 0 5px 0;
+  font-size:16px;
+  color:black;
+}
+  
+.popup-line-input-container input:focus {
+  border:none;	
+  outline:none;
+  border-bottom:1px solid black;
+}
+  
+.popup-line-input-container label {
+  position:absolute;
+  top:0px;
+  left:0px;
+  font-size:18px;
+  color:#434343;
+  transition: all 0.3s ease-in-out;
+  cursor: text;
+}
+  
+.popup-line-input-container input:focus ~ label,
+.popup-line-input-container input:not(:placeholder-shown) ~ label {
+  top:-18px;
+  font-size:16px;
+}
+
+.popup-outline-input-container {
+  width: 190px;
+  border-radius: 25px; 
+  border-left: 1.5px black solid;
+  border-top: 1.5px black solid;
+  border-bottom: 1.5px black solid;
+  border-right: 1.5px black solid;
+  font-size: 18px;
+  font-family: 'Open Sans'; 
+}
+  
+.popup-outline-input-container select {
+  width: 190px;
+  border-radius: 25px; 
+  padding: 10px 18px;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  border-right: 17px solid transparent;
+  font-size: 18px;
+  font-family: 'Open Sans'; 
+}
+
+.form-error {
+  font-size: 16px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  max-width: 180px;
+  color: var(--red);
+}
