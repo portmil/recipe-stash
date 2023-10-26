@@ -26,6 +26,10 @@
   display: block;
 }
 
+.recipe-title {
+  word-wrap: break-word;
+}
+
 .info-container {
   border-top: 2px solid black;
   border-bottom: 2px solid black;
@@ -71,10 +75,12 @@
     margin-bottom: 5px;
     color: var(--black);
     font-family: 'Open Sans';
+    word-wrap: break-word;
   }
 
 .primary-btn.cook-now {
     margin-top: 30px;
+    margin-bottom: 100px;
 }
 
 .category-container {
@@ -130,8 +136,9 @@
 
 @media only screen and (min-width: 1025px) {
   .recipe-page-container {
-    margin: 40px 100px;
-    width: 100%;
+    box-sizing: border-box;
+    margin: 40px auto;
+    width: 55vw;
   }
 
   .info-container {

@@ -114,7 +114,7 @@ const RecipePage = () => {
             </button>
           </div>
           <div>
-            <h1>{recipe.name}</h1>
+            <h1 className='recipe-title'>{recipe.name}</h1>
             <div className='info-container'>
               <div className='category-container'>
                 {recipe.categories && recipe.categories.map(category => createCategoryCard(category))}

@@ -62,9 +62,11 @@
 .category-text {
   font-size: 16px;
   margin: 7px;
+  word-wrap: break-word;
 }
 
 .category-card {
+  min-width: 90px;
   width: 90px;
   height: 110px;
   text-align: center;
@@ -118,6 +120,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  word-wrap: break-word;
+  max-width: 75%;
 }
 
 .star-container {
