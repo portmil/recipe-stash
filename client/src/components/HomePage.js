@@ -31,7 +31,6 @@ const HomePage = () => {
   }, []);
 
   const createCategoryCard = (category) => {
-
     return (
       <div key={category.name} className='category-card'>
         <button

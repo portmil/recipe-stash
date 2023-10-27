@@ -25,6 +25,8 @@
   gap: 10px;
   overflow-x: scroll;
   text-align: center;
+  overflow-y: hidden;
+  height: 132px;
 }
 
 .icon-background {
