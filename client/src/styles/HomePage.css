@@ -24,7 +24,9 @@
   flex-direction: row;
   gap: 10px;
   overflow-x: scroll;
+  overflow-y: hidden;
   text-align: center;
+  height: 110px;
 }
 
 .icon-background {
@@ -61,16 +63,15 @@
 
 .category-text {
   font-size: 16px;
-  margin: 7px;
+  margin: 7px 0px;
   word-wrap: break-word;
 }
 
 .category-card {
-  min-width: 90px;
-  width: 90px;
+  width: 100px;
   height: 110px;
   text-align: center;
-
+  margin: 0px 10px;
 }
 
 .recipe-container {
@@ -162,8 +163,9 @@
 
 @media only screen and (min-width: 1025px) {
   .main-page-container {
-    margin: 40px 80px;
-    width: 100%;
+    box-sizing: border-box;
+    margin: 40px auto;
+    width: 60vw;
   }
   .recipe-card p {
     font-size: 18px;
