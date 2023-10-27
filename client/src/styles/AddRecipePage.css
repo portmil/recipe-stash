@@ -16,7 +16,7 @@
 /* Form layout: */
 #add-recipe-header {
   margin-top: 60px;
-  margin-bottom: 45px;
+  margin-bottom: 20px;
 }
 
 .add-recipe-form {
@@ -67,7 +67,7 @@
   display: flex;
   flex-direction: row;
   gap: 18px;
-  margin-bottom: 150px;
+  margin-bottom: 30px;
 }
 
 /* Cooking time input: */
@@ -319,6 +319,10 @@
 /* Form layout for desktop */
 
 @media only screen and (min-width: 1025px) { 
+
+  #add-recipe-header {
+    margin-bottom: 28px;
+  }
 
   .input-container{
     display: flex;
