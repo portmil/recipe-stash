@@ -12,7 +12,8 @@ import CategoryIcon from './CategoryIcon';
 
 const CategorySelection = ({ 
   addedCategories, 
-  setAddedCategories }) => {
+  setAddedCategories,
+  categoryNameMaxLength }) => {
 
   const [category, setCategory] = useState('');                   // Chosen category
   const [currentCategories, setCurrentCategories] = useState([]); // Existing categories
@@ -60,8 +61,8 @@ const CategorySelection = ({
         </select>
       </div>
       <CategoryPopup 
-        currentCategories={currentCategories}
-        addedCategories={addedCategories} setAddedCategories={setAddedCategories}/>
+        currentCategories={currentCategories} addedCategories={addedCategories} 
+        setAddedCategories={setAddedCategories} categoryNameMaxLength={categoryNameMaxLength}/>
       { addedCategories.map((category, index) => {
         return (
           <div className='category-container' key={index}>
@@ -82,7 +83,8 @@ const CategorySelection = ({
 
 CategorySelection.propTypes = {
   addedCategories: PropTypes.array,
-  setAddedCategories: PropTypes.func
+  setAddedCategories: PropTypes.func,
+  categoryNameMaxLength: PropTypes.number
 };
 
 export default CategorySelection;

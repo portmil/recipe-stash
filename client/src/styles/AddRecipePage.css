@@ -52,7 +52,15 @@
 .add-recipe-form-error {
   font-size: 16px;
   color: var(--red);
-  margin-top: 0;
+  margin: 0 20px 10px 20px;
+  max-width: 70%;
+}
+
+.add-recipe-form-error-desc {
+  font-size: 16px;
+  color: var(--red);
+  margin: 0;
+  width: 280px
 }
 
 .button-container {
@@ -103,6 +111,7 @@
 
 #category {
   width: 260px;
+  cursor: pointer;
 }
 
 #add-category-btn {
@@ -112,6 +121,7 @@
   font-family: 'Open Sans';
   font-weight: 600;
   align-self: flex-start;
+  cursor: pointer;
 }
 
 .category-container {
@@ -182,6 +192,10 @@
 
 #confirm-btn-popup {
   margin-top: 10px;
+}
+
+#category-icon {
+  cursor: pointer;
 }
 
 /* Drop down menu: */
@@ -278,6 +292,28 @@
 
 #description {
   max-height: 187px;
+}
+
+/* Add styling to the description's scrollbar for Chrome and Safari */
+#description::-webkit-scrollbar {
+  width: 16px;
+}
+
+#description::-webkit-scrollbar-track-piece {
+  margin-top: 10px;
+}
+
+#description::-webkit-scrollbar-thumb {
+  border: solid rgba(0, 0, 0, 0);
+  border-width: 4px;
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #C1C1C1;
+  min-height: 20px;
+}
+
+#description::-webkit-scrollbar-corner {
+  border: none;
 }
 
 /* Form layout for desktop */

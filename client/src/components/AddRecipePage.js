@@ -7,6 +7,13 @@ import CategorySelection from '../components/addRecipe/CategorySelection.js';
 import recipeService from '../services/recipes';
 import categoryService from '../services/categories';
 
+const maxLengths = {
+  recipeName: 40,
+  link: 200,
+  categoryName: 14,
+  description: 2700
+};
+
 const AddRecipePage = () => {
 
   const navigate = useNavigate();
@@ -16,7 +23,7 @@ const AddRecipePage = () => {
   const [link, setLink] = useState('');
   const [cookingTime, setCookingTime] = useState('');
   const [description, setDescription] = useState('');
-  const [cookingDate, setDate] = useState('');
+  const [lastMakingDate, setDate] = useState('');
 
   /* Specified categories for the recipe, including new catgeories */
   const [addedCategories, setAddedCategories] = useState([]);
@@ -24,19 +31,22 @@ const AddRecipePage = () => {
   const [dateType, setDateType] = useState('text');
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [showWarning, setShowWarning] = useState(false);
+  const [showDescWarning, setShowDescWarning] = useState(false);
+  const [warningMessage, setShowWarningMessage] = useState('');
 
   /* First, the type of the date field is 'text' to display its label.
      When it is clicked the first time, the type changes to 'date'. */
   const handleDateFocus = () => {
     setDateType('date');
     /* If the input is pressed when there is a placeholder, default to today */
-    if (!cookingDate && dateType === 'text') {
+    if (!lastMakingDate && dateType === 'text') {
       const today = new Date();
       const formattedDate = today.toISOString().slice(0, 10);
       setDate(formattedDate);
     }
     /* If the input is cleared, set the placeholder back */
-    if (!cookingDate && dateType === 'date') {
+    if (!lastMakingDate && dateType === 'date') {
       setDateType('text');
       setDate('');
     }
@@ -50,10 +60,15 @@ const AddRecipePage = () => {
     }
   };
 
-  /* Create the recipe */
+  /* Create the recipe, only send properties if they have been defined */
   const addRecipe = async () => {
-    const recipe = { name, link, description, lastMakingDate: cookingDate, cookingTime };
-    console.log(recipe);
+    const recipe = { 
+      ...(name ? { name } : {}), 
+      ...(link ? { link } : {}), 
+      ...(lastMakingDate ? { lastMakingDate } : {}), 
+      ...(description ? { description } : {}), 
+      ...(cookingTime ? { cookingTime } : {}),
+    };
     const response = await recipeService.addRecipe(recipe);
     return response;
   };
@@ -75,14 +90,33 @@ const AddRecipePage = () => {
       return;
     }
     try {
-      await createCategories();
       const response = await addRecipe();
+      await createCategories();
       await updateCategories(response.id);
       navigate('/home', { replace: true });
     } catch (exception) {
-      setErrorMessage('Error: Adding a recipe was not successful');
+      const e = exception.response.status === 400 ? exception.response.data.error : exception.message;
+      setErrorMessage(`Adding a recipe was not successful. ${e}`);
       setShowError(true);
     }
+  };
+
+  /* Display a warning message if a user wants to type more than max lengths */
+  const showWarningMessage = (target, input, maxLength) => {
+    if (target.value.length >= maxLength) {
+      setShowWarningMessage(`The max length of a ${input} is ${maxLength} characters`);
+      if (input === 'description') {
+        setShowDescWarning(true);
+      } else {
+        setShowWarning(true);
+      }
+    }
+  };
+
+  const clearWarningMessage = () => {
+    setShowWarningMessage('');
+    setShowWarning(false);
+    setShowDescWarning(false);
   };
 
   return (
@@ -90,12 +124,19 @@ const AddRecipePage = () => {
       <form className='add-recipe-form' onSubmit={handleSubmit}>
         <h1 id='add-recipe-header'>Add Recipe</h1>
         {showError && <p className='add-recipe-form-error'>{errorMessage}</p>}
+        {showWarning && <p className='add-recipe-form-error'>{warningMessage}</p>}
         <div className='input-container'>
           <div className='start-form-container'>
             <div className='multiple-line-input-container'>
               <div className='line-input-container'>
-                <input type='text' name='name' placeholder=' ' id='name'
+                <input type='text' name='name' placeholder=' ' id='name' 
+                  maxLength={maxLengths.recipeName}
+                  onKeyDown={({ target }) => {
+                    showWarningMessage(target, 'recipe name', maxLengths.recipeName);
+                  }}
+                  onBlur={clearWarningMessage}
                   onChange={({ target }) => {
+                    clearWarningMessage();
                     setErrorMessage('');
                     setShowError(false);
                     setName(target.value);
@@ -104,14 +145,23 @@ const AddRecipePage = () => {
                 <label htmlFor='name'>Name *</label>
               </div>
               <div className='line-input-container'>
-                <input type='link' name='link' placeholder=' ' id='link'
-                  onChange={({ target }) => setLink(target.value)}>
+                <input type='link' name='link' placeholder=' ' id='link' 
+                  maxLength={maxLengths.link}
+                  onKeyDown={({ target }) => {
+                    showWarningMessage(target, 'link', maxLengths.link);
+                  }}
+                  onBlur={clearWarningMessage}
+                  onChange={({ target }) => {
+                    clearWarningMessage();
+                    setLink(target.value);
+                  }}>
                 </input>
                 <label htmlFor='link'>Link</label>
               </div>
               <div className='cooking-time-container'>
                 <label htmlFor='cooking-time'>Cooking time (minutes):</label>
                 <input className='outline-input' name='cooking-time' type='number'
+                  min={0}
                   placeholder=' ' 
                   id='cooking-time'
                   value={cookingTime}
@@ -122,19 +172,29 @@ const AddRecipePage = () => {
             <CategorySelection 
               addedCategories={addedCategories} 
               setAddedCategories={setAddedCategories}
+              categoryNameMaxLength={maxLengths.categoryName}
             />
           </div>
           <div className='end-form-container'>
             <textarea className='outline-input' id="description" name="description" 
+              maxLength={maxLengths.description}
               placeholder='Description'
               value={description}
-              onChange={({ target }) => setDescription(target.value)}> 
+              onKeyDown={({ target }) => {
+                showWarningMessage(target, 'description', maxLengths.description);
+              }}
+              onBlur={clearWarningMessage}
+              onChange={({ target }) => {
+                clearWarningMessage();
+                setDescription(target.value);
+              }}>
             </textarea>
+            {showDescWarning && <p className='add-recipe-form-error-desc'>{warningMessage}</p>}
             <input className='outline-input' name='cooking-date' type={dateType}
               onFocus={handleDateFocus}
               placeholder='Cooking date' 
               id='cooking-date'
-              value={cookingDate}
+              value={lastMakingDate}
               onChange={(e) => setDate(e.target.value)}>
             </input>
           </div>

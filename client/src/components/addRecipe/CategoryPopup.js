@@ -28,15 +28,19 @@ const getExtraIcons = () => {
 const CategoryPopup = ({ 
   currentCategories,
   addedCategories, 
-  setAddedCategories }) => {
+  setAddedCategories,
+  categoryNameMaxLength }) => {
 
   const extraIconsWithNames = getExtraIcons();
 
   const [newCategoryName, setNewCategoryName] = useState('');
   const [selectedIcon, setSelectedIcon] = useState(null);
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [showWarning, setShowWarning] = useState(false);
+  const [warningMessage, setShowWarningMessage] = useState('');
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -77,12 +81,27 @@ const CategoryPopup = ({
     return true;
   };
 
+  /* Display a warning message if a user wants to type more than max lengths */
+  const showWarningMessage = (target) => {
+    if (target.value.length >= categoryNameMaxLength) {
+      setShowWarningMessage(`The max length of a category name is ${categoryNameMaxLength} characters`);
+      setShowWarning(true);
+    }
+  };
+
+  /* Display a warning message if a user wants to type more than max length */
+  const clearWarningMessage = () => {
+    setShowWarningMessage('');
+    setShowWarning(false);
+  };
+
   const clearPopup = () => {
     setIsDropdownOpen(false);
     setNewCategoryName('');
     setSelectedIcon(null);
     setErrorMessage('');
     setShowError(false);
+    clearWarningMessage();
   };
 
   return (
@@ -94,8 +113,15 @@ const CategoryPopup = ({
             <div className='popup-container'>
               <div className='popup-line-input-container'>
                 <input type='text' name='category-name' placeholder=' ' id='category-name'
-                  maxLength={14}
-                  onChange={({ target }) => setNewCategoryName(target.value)}>
+                  maxLength={categoryNameMaxLength}
+                  onKeyDown={({ target }) => showWarningMessage(target)}
+                  onBlur={clearWarningMessage}
+                  onChange={({ target }) => {
+                    clearWarningMessage();
+                    setErrorMessage('');
+                    setShowError(false);
+                    setNewCategoryName(target.value);
+                  }}>
                 </input>
                 <label htmlFor='category-name'>Category name</label>
               </div>
@@ -123,7 +149,8 @@ const CategoryPopup = ({
                   <CategoryIcon category={selectedIcon} width={25}/>
                 </div>
               }
-              { showError && <p className='form-error'>{errorMessage}</p> }
+              {showError && <p className='popup-form-error'>{errorMessage}</p>}
+              {showWarning && <p className='popup-form-error'>{warningMessage}</p>}
               <button type='button' id='confirm-btn-popup' className='primary-btn' 
                 onClick={(event) =>  {
                   const closePopup = handleAddCategory(event);
@@ -148,7 +175,8 @@ const CategoryPopup = ({
 CategoryPopup.propTypes = {
   addedCategories: PropTypes.array,
   setAddedCategories: PropTypes.func,
-  currentCategories: PropTypes.array
+  currentCategories: PropTypes.array,
+  categoryNameMaxLength: PropTypes.number
 };
 
 export default CategoryPopup;
