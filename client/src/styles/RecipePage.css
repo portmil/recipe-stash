@@ -48,10 +48,9 @@
 }
 
 .rating-container {
-    width: 75px;
-    min-width: 75px;
-    height: 110px;
-    padding-top: 5px;
+  width: 75px;
+  min-width: 75px;
+  height: 130px;
 }
 
 .star-rating {
@@ -60,74 +59,74 @@
 }
 
 .star-rating.filled {
-    fill: var(--yellow);
+  fill: var(--yellow);
 }
 
 .attributes-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .attribute-text {
-    font-size: 16px;
-    margin: 0px;
-    margin-bottom: 5px;
-    color: var(--black);
-    font-family: 'Open Sans';
-    word-wrap: break-word;
-  }
+  font-size: 16px;
+  margin: 0px;
+  margin-bottom: 5px;
+  color: var(--black);
+  font-family: 'Open Sans';
+  word-wrap: break-word;
+}
 
 .primary-btn.cook-now {
-    margin-top: 30px;
-    margin-bottom: 100px;
+  margin-top: 30px;
 }
 
 .category-container {
-    display: flex;
-    flex-direction: row;
-    overflow: scroll;
-    height: 130px;
+  display: flex;
+  flex-direction: row;
+  overflow: scroll;
+  height: 130px;
 }
 
 @media only screen and (max-width: 400px) {
-    .info-container {
-        padding: 25px 5px 3px 0px;
-      }
+  .info-container {
+    padding: 25px 5px 3px 0px;
+  }
 }
 
 @media only screen and (max-width: 550px) {
-    .icon-background.active.no-pointer {
-        width: 55px;
-        height: 55px;
-      }
-    .category-icon.active.recipe-page {
-        width: 36px;
-    }
-    .category-text.recipe-page {
-        font-size: 14px;
-    }
-    .category-card {
-        width: 75px;
-    }
-    .rating-container {
-        width: 65px;
-        min-width: 65px;
-        padding-top: 6px;
-    }
-    
-    .star-rating {
-      width: 20px;
-      height: 20px;
-    }
-    .info-container {
-        gap: 10px;
-      }
-    .category-container {
-        height: 120px;
-    }
-
+  .icon-background.active.no-pointer {
+    width: 55px;
+    height: 55px;
   }
+  .category-icon.active.recipe-page {
+    width: 36px;
+  }
+  .category-text.recipe-page {
+    font-size: 14px;
+  }
+  .category-card {
+    width: 75px;
+  }
+  .rating-container {
+    width: 65px;
+    min-width: 65px;
+    padding-top: 15px;
+    height: 120px;
+  }
+    
+  .star-rating {
+    width: 20px;
+    height: 20px;
+  }
+  .info-container {
+    gap: 10px;
+  }
+  .category-container {
+    height: 120px;
+  }
+
+}
 
 @media only screen and (max-width: 1024px) {
 
