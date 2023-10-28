@@ -37,7 +37,7 @@ recipesRouter.get('/:id', async (request, response, next) => {
 
 
 recipesRouter.post('/', async (request, response, next) => {
-  const { name, link, description, rating, lastMakingDate } = request.body
+  const { name, link, description, cookingTime, rating, lastMakingDate } = request.body
   const user = request.user
 
   if (!user) {
@@ -48,6 +48,7 @@ recipesRouter.post('/', async (request, response, next) => {
     name,
     link,
     description,
+    cookingTime,
     rating: rating || 0,
     lastMakingDate: lastMakingDate || new Date(0),
     userId: user._id
