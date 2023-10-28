@@ -11,7 +11,16 @@
 body {
   background-color: var(--background-white);
   color: var(--black);
+  /* Disable horizontal scrolling */
+  overflow-x: hidden;
+  /* Hide vertical scrollbar for IE, Edge */
+  -ms-overflow-style: none;
+  /* Hide vertical scrollbar for Firefox */
+  scrollbar-width: none;
 }
+
+/* Hide vertical scrollbar for Chrome, Safari */
+body::-webkit-scrollbar { width: 0 !important }
 
 .App {
   text-align: center;
@@ -63,7 +72,7 @@ p {
   box-shadow: 0px 6px 4px rgba(0, 0, 0, 0.30) inset
 }
 
-.line-input-container{
+.line-input-container {
   position:relative;
   margin-bottom:10px;
   width: 260px;
@@ -91,7 +100,7 @@ p {
   left:0px;
   font-size:18px;
   color:#434343;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
   cursor: text;
 }
 
@@ -103,12 +112,13 @@ p {
 
 .outline-input-container {
   border-radius: 25px; 
-  border-left: 2px black solid;
-  border-top: 2px black solid;
-  border-bottom: 2px black solid;
-  border-right: 2px black solid;
+  border-left: 1.5px black solid;
+  border-top: 1.5px black solid;
+  border-bottom: 1.5px black solid;
+  border-right: 1.5px black solid;
   font-size: 18px;
   font-family: 'Open Sans'; 
+  background-color: var(--background-white);
 }
 
 .outline-input-container select {
@@ -120,14 +130,16 @@ p {
   border-right: 17px solid transparent;
   font-size: 18px;
   font-family: 'Open Sans'; 
+  background-color: var(--background-white);
 }
 
 .outline-input {
   border-radius: 25px; 
-  border: 2px black solid;
+  border: 1.5px black solid;
   padding: 10px 18px;
   font-size: 18px;
   font-family: 'Open Sans'; 
+  background-color: var(--background-white);
 }
 
 @media only screen and (min-width: 651px){ 
