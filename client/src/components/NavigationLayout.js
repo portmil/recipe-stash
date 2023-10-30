@@ -13,7 +13,7 @@ import React from 'react';
 const NavigationLayout = () => {
   return (
     <div id='container'> 
-      <nav>
+      <nav id='navigation'>
         <div id='nav-bar-mobile'>
           <div className='nav-background-fill' id='nav-background-fill-left'/>
           <div className='nav-background-fill' id='nav-background-fill-right'/>

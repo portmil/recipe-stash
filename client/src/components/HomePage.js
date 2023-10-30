@@ -64,7 +64,7 @@ const HomePage = () => {
     const iconName = recipe.categories.length > 1 ? recipe.categories[1].name : 'All';
 
     return (
-      <div key={recipe.id} className='recipe-card' onClick={() => navigate(`/${recipe.id}`)}>
+      <div key={recipe.id} className='recipe-card' onClick={() => navigate(`/recipe/${recipe.id}`)}>
         <div className='recipe-icon-container'>
           <img className='recipe-icon' src={require(`../graphics/${icon}.svg`)} alt={`Icon for category '${iconName}'`}/>
         </div>

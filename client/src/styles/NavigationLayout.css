@@ -91,7 +91,7 @@
     gap: 20px;
   }
 
-  #container a {
+  #navigation a {
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -104,19 +104,19 @@
     color: var(--black);
   }
 
-  #container a:hover {
+  #navigation a:hover {
     background-color: var(--background-white);
   }
-  #container a.active {
+  #navigation a.active {
     background-color: var(--background-white);
   }
-  #container a:hover svg {
+  #navigation a:hover svg {
     fill: var(--orange);
   }
-  #container a.active svg {
+  #navigation a.active svg {
     fill: var(--orange);
   }
-  #container a svg {
+  #navigation a svg {
     fill: var(--white);
   }
 
@@ -147,7 +147,7 @@
     display: none;
   }
     
-  #container a.active svg {
+  #navigation a.active svg {
     fill: var(--white);
   }
 

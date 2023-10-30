@@ -19,7 +19,9 @@ recipesRouter.get('/', async (request, response) => {
 recipesRouter.get('/:id', async (request, response, next) => {
   const user = request.user
   try {
-    const recipe = await Recipe.findById(request.params.id)
+    const recipe = await Recipe
+      .findById(request.params.id)
+      .populate('categories', { name: 1, icon: 1 });
     if (!recipe) {
       return response.status(404).json({ error: 'recipe not found' })
     }

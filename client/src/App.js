@@ -10,6 +10,7 @@ import AddRecipePage from './components/AddRecipePage';
 import RankingPage from './components/RankingPage';
 import ProfilePage from './components/ProfilePage';
 import NavigationLayout from './components/NavigationLayout';
+import RecipePage from './components/RecipePage';
 import React from 'react';
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
             <Route path='/add-recipe' element={<AddRecipePage/>}/>
             <Route path='/ranking' element={<RankingPage/>}/>
             <Route path='/profile' element={<ProfilePage/>}/>
+            <Route path='/recipe/:id' element={<RecipePage/>}/>
           </Route>
         </Route>
       </Routes>
