@@ -20,7 +20,7 @@ const addRecipe = async (recipe) => {
 
 const recipeService = {
   getAll,
-  getRecipe
+  getRecipe,
   addRecipe,
 };
 
