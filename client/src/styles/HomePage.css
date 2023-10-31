@@ -1,5 +1,6 @@
 .main-page-container {
   margin: 15px 25px;
+  z-index: 100;
 }
 
 .header-container {

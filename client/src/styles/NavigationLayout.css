@@ -5,6 +5,10 @@
   --background-white: #FDFDFD;
 }
 
+#navigation {
+  z-index: 101;
+}
+
 #nav-bar-mobile {
   display: flex;
   justify-items: center;
