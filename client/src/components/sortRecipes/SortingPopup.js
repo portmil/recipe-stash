@@ -8,10 +8,13 @@ import Popup from 'reactjs-popup';
 sorting settings for the recipes displayed in the home page */
 
 const SortingPopup = ({ 
+  sortBy,
   setSortBy,
+  order,
   setOrder }) => {
     
   const sortOptions = ['Alphabetical', 'Cooking time', 'Latest cooking date', 'Ranking', 'Rating'];
+  const dirOptions = ['Ascending', 'Descending'];
 
   const updateSort = () => {
     const selectedSort = document.querySelector('#select-sort-by').value;
@@ -51,9 +54,13 @@ const SortingPopup = ({
                 <div className='dropdown'>
                   <div className='popup-outline-input-container'>
                     <select id='select-sort-by'>
-                      {sortOptions.map(option =>
-                        <option value={option} key={option}>{option}</option>
-                      )}
+                      {sortOptions.map(option => {
+                        if (option === sortBy) { // set current selection as default
+                          return <option key={option} selected>{option}</option>;
+                        } else {
+                          return <option key={option}>{option}</option>;
+                        }
+                      })}
                     </select>
                   </div>
                 </div>
@@ -63,8 +70,13 @@ const SortingPopup = ({
                 <div className='dropdown'>
                   <div className='popup-outline-input-container'>
                     <select id='select-sort-dir'>
-                      <option value='Asc' >{'Ascending'}</option>
-                      <option value='Desc' >{'Descending'}</option>
+                      {dirOptions.map(dir => {
+                        if (dir === order) { // set current direction as default
+                          return <option key={dir} selected>{dir}</option>;
+                        } else {
+                          return <option key={dir}>{dir}</option>;
+                        }
+                      })}
                     </select>
                   </div>
                 </div>
@@ -102,9 +114,13 @@ const SortingPopup = ({
                 <div className='dropdown'>
                   <div className='popup-outline-input-container'>
                     <select id='select-sort-by'>
-                      {sortOptions.map(option =>
-                        <option value={option} key={option}>{option}</option>                        
-                      )}
+                      {sortOptions.map(option => {
+                        if (option === sortBy) { // set current selection as default
+                          return <option key={option} selected>{option}</option>;
+                        } else {
+                          return <option key={option}>{option}</option>;
+                        }
+                      })}
                     </select>
                   </div>
                 </div>
@@ -114,8 +130,13 @@ const SortingPopup = ({
                 <div className='dropdown'>
                   <div className='popup-outline-input-container'>
                     <select id='select-sort-dir'>
-                      <option value='Asc' >{'Ascending'}</option>
-                      <option value='Desc' >{'Descending'}</option>
+                      {dirOptions.map(dir => {
+                        if (dir === order) { // set current direction as default
+                          return <option key={dir} selected>{dir}</option>;
+                        } else {
+                          return <option key={dir}>{dir}</option>;
+                        }
+                      })}
                     </select>
                   </div>
                 </div>
@@ -137,7 +158,9 @@ const SortingPopup = ({
 
 
 SortingPopup.propTypes = {
+  sortBy: PropTypes.string,
   setSortBy: PropTypes.func,
+  order: PropTypes.string,
   setOrder: PropTypes.func
 };
 

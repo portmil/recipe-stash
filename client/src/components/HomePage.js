@@ -15,7 +15,7 @@ const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
   const [activeCategory, setActiveCategory] = useState('All');
   const [sortBy, setSortBy] = useState('Latest cooking date');
-  const [order, setOrder] = useState('Asc');
+  const [order, setOrder] = useState('Ascending');
 
   // Filter recipes based on category
   const filteredRecipes = recipes.filter(r => r.categories.map(cat => cat.name).includes(activeCategory));
@@ -46,7 +46,7 @@ const HomePage = () => {
   }
 
   // Flip the order if the user has chosen descending order
-  const recipesToShow = order === 'Desc' ? sortedRecipes.reverse() : sortedRecipes;
+  const recipesToShow = order === 'Descending' ? sortedRecipes.reverse() : sortedRecipes;
 
   useEffect(() => {
     // the callback function passed to useEffect() cannot be async, so 
@@ -125,7 +125,7 @@ const HomePage = () => {
       </div>
       <div className='header-container'>
         <h2>Recipes</h2>
-        <SortingPopup setSortBy={setSortBy} setOrder={setOrder}/>
+        <SortingPopup sortBy={sortBy} setSortBy={setSortBy} order={order} setOrder={setOrder}/>
       </div>
       <div className='recipe-container'>
         {recipesToShow.map(recipe => createRecipeCard(recipe))}
