@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { ReactComponent as BackIcon } from '../graphics/back_icon.svg';
 import { ReactComponent as EditIcon } from '../graphics/edit_icon.svg';
 import { ReactComponent as StarIcon } from '../graphics/star_icon.svg';
+import CookRecipe from './CookRecipe';
 
 const RecipePage = () => {
 
@@ -140,7 +141,7 @@ const RecipePage = () => {
               </div>}
             {createCookingDate()}
           </div>
-          <button className='primary-btn cook-now'>COOK NOW</button>
+          <CookRecipe currentRating={recipe.rating} />
         </>
       }
     </div>
