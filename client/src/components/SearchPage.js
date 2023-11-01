@@ -1,7 +1,7 @@
 import '../styles/App.css';
 import '../styles/SearchPage.css';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { ReactComponent as SearchIcon } from '../graphics/search_icon.svg';
 import RecipeCard from './recipeInfo/RecipeCard';
 import recipeService from '../services/recipes';
@@ -11,10 +11,13 @@ const SearchPage = () => {
 
   const navigate = useNavigate();
 
-  const [searchValue, setSearchValue] = useState('');
   const [allRecipes, setAllRecipes] = useState([]);
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
+
+  const { 
+    searchValue, setSearchValue,
+    filteredRecipes, setFilteredRecipes 
+  } = useOutletContext();
 
   useEffect (() => {
     /* The callback function passed to useEffect() cannot be async, so 
