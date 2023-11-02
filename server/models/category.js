@@ -3,7 +3,11 @@ const uniqueValidator = require('mongoose-unique-validator')
 
 
 const categorySchema = new mongoose.Schema({
-  name: { type: String, required: [true, 'is required'] },
+  name: {
+    type: String,
+    required: [true, 'is required'],
+    maxLength: [14, 'should be at most 14 characters long']
+  },
   icon: String,
   isDefault: Boolean,
   rankedRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Recipe' }],

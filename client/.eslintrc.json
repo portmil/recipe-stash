@@ -22,7 +22,8 @@
   "rules": {
     "indent": [
       "error",
-      2
+      2,
+      {"SwitchCase": 1} // fixes the indentation rule of switch statements, which is wrong by default
     ],
     "linebreak-style": [
       "error",
