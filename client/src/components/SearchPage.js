@@ -33,7 +33,7 @@ const SearchPage = () => {
   }, []);
 
   /* Sort recipes so that recipes containing the given value in their names 
-     are showed first (and recipes sorted based on categories are shown last).
+     are showed first (and recipes searched based on categories are shown last).
      Also, sort recipes based on how early the value is displayed in their name */
   const sortRecipes = (array, value) => {
     array.sort((recipeA, recipeB) => {
@@ -80,7 +80,7 @@ const SearchPage = () => {
       <div className='search-bar'>
         <div id='search-input-container'>
           <input className='outline-input' name='search' type='text'
-            placeholder=' ' 
+            placeholder='Search' 
             id='search'
             value={searchValue}
             onChange={({ target }) => {
