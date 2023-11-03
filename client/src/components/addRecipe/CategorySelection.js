@@ -48,7 +48,7 @@ const CategorySelection = ({
 
   return (
     <div className='categories-input-container'>
-      <div className='outline-input-container'>
+      <div className='outline-input-container' id='category-select'>
         <select type='category' name='category' placeholder='Category' 
           id='category' 
           value={category}
@@ -65,7 +65,7 @@ const CategorySelection = ({
         setAddedCategories={setAddedCategories} categoryNameMaxLength={categoryNameMaxLength}/>
       { addedCategories.map((category, index) => {
         return (
-          <div className='category-container' key={index}>
+          <div className='selected-category-container' key={index}>
             <div className='category-info'>
               <CategoryIcon category={category} width={30}/>
               <p className='category-text'>{category.name}</p>
