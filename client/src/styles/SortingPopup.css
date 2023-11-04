@@ -1,0 +1,90 @@
+.sorting-header {
+  margin: 0px;
+  font-size: 22px;
+}
+
+.sorting-popup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.sorting-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.close-popup-button {
+  position: absolute;
+  top: 38px;
+  right: 30px;
+  border: 1.5px black solid;
+  border-radius: 50%;
+  padding: 4px 9px;
+  background-color: var(--background-white);
+  font-family: 'Open Sans';
+  font-weight: 700;
+  font-size: 16px;
+}
+  
+.close-popup-button:hover {
+  top: 37.5px;
+  right: 29.5px;
+  font-size: 17px;
+}
+
+#select-sorting.popup-outline-input-container {
+  width: 250px;
+}
+    
+#select-sorting.popup-outline-input-container select {
+  width: 250px;
+}
+
+.sort-label {
+  font-size: 18px;
+  font-family: 'Open Sans';
+  font-weight: 700;
+  margin-bottom: -6px;
+  margin-left: 5px;
+}
+
+@media only screen and (min-width: 801px) {
+  #sorting.content {
+    position: fixed;
+    width: 319px;
+    padding: 30px 0px;
+    max-width: 330px;
+    border-radius: 40px 40px 40px 40px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    z-index: 999;
+  }
+  .sorting-popup-container {
+    margin: 10px 0px 15px 0px;
+  }
+  .sorting-popup-overlay {
+    background-color: transparent;
+  }
+  .header-container {
+    position: relative;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+
+  #sorting.content {
+    position: fixed;
+    width: 100vw;
+    padding: 30px 0px;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    border-radius: 50px 50px 0px 0px;
+  }
+  .sorting-popup-container {
+    margin: 3vw 0px 5vw 0px;
+  }
+}

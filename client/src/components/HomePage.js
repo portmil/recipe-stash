@@ -67,8 +67,7 @@ const HomePage = () => {
         <button
           className={activeCategory === category.name ? 'icon-background active' : 'icon-background'}
           onClick={() => setActiveCategory(category.name)}
-          key={ category.name }
-        >
+          key={ category.name }>
           <img
             className={activeCategory === category.name ? 'category-icon active' : 'category-icon'}
             src={require(`../graphics/${category.icon}.svg`)}

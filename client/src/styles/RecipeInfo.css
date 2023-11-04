@@ -78,14 +78,27 @@
 }
   
 @media only screen and (min-width: 1150px) {
+
   .recipe-container {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-  
+    justify-content: space-between;
+    column-gap: 0px;
+    row-gap: 20px;
   }
   .recipe-card {
     box-sizing: border-box;
-    flex-basis: 48%;
+    flex-basis: 49%;
   }
+
+  /*
+  .recipe-container {
+    display: grid;
+    grid-template-columns: calc(50% - 10px) calc(50% - 10px) ;
+    grid-gap: 20px;
+  }
+  .recipe-card {
+    box-sizing: border-box;
+  }*/
+  
 }
