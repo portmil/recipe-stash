@@ -18,10 +18,22 @@ const addRecipe = async (recipe) => {
   return response.data;
 };
 
+const deleteRecipe = async (id) => {
+  const response = await axios.delete(`${baseUrl}/${id}`, userService.getAuthHeader());
+  return response.data;
+};
+
+const editRecipe = async (id, update) => {
+  const response = await axios.put(`${baseUrl}/${id}`, update, userService.getAuthHeader());
+  return response.data;
+};
+
 const recipeService = {
   getAll,
   getRecipe,
   addRecipe,
+  deleteRecipe,
+  editRecipe
 };
 
 export default recipeService;

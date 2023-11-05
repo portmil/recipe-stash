@@ -1,0 +1,37 @@
+#edit-recipe-container {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.right-align {
+  margin-left: auto;
+}
+
+/* Form layout: */
+#edit-recipe-header {
+  margin: 20px;
+  margin-bottom: 20px;
+}
+
+.edit-recipe-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  gap: 25px;
+}
+
+.edit-recipe-form-error {
+  font-size: 16px;
+  color: var(--red);
+  margin: 0 20px 10px 20px;
+  max-width: 70%;
+}
+
+.edit-recipe-form-error-desc {
+  font-size: 16px;
+  color: var(--red);
+  margin: 0;
+  width: 280px
+}

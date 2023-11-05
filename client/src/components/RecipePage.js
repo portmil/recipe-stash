@@ -109,7 +109,7 @@ const RecipePage = () => {
             <button className='icon-button' onClick={() => navigate(-1)} >
               <BackIcon className='icon'/>
             </button>
-            <button className='icon-button'>
+            <button className='icon-button' onClick={() => navigate(`/recipe/${recipe.id}/edit`)} >
               <EditIcon className='icon'/>
             </button>
           </div>
@@ -131,7 +131,7 @@ const RecipePage = () => {
             {recipe.cookingTime && 
               <div className='attribute-container'>
                 <h3>Cooking time</h3>
-                <p className='attribute-text'>{recipe.cookingTimen} minutes</p>
+                <p className='attribute-text'>{recipe.cookingTime} minutes</p>
               </div>}
             {recipe.description && 
               <div className='attribute-container'>

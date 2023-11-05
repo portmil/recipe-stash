@@ -17,10 +17,16 @@ const addRecipeToCategory = async (categoryId, recipeId) => {
   return response.data;
 };
 
+const deleteRecipeFromCategory = async (categoryId, recipeId) => {
+  const response = await axios.delete(`${baseUrl}/${categoryId}/${recipeId}`, userService.getAuthHeader());
+  return response.data;
+};
+
 const categoryService = {
   getAll,
   addCategory,
   addRecipeToCategory,
+  deleteRecipeFromCategory
 };
 
 export default categoryService;

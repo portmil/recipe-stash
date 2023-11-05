@@ -7,6 +7,7 @@ import SignupPage from './components/userManagement/SignupPage';
 import HomePage from './components/HomePage';
 import SearchPage from './components/SearchPage';
 import AddRecipePage from './components/AddRecipePage';
+import EditRecipePage from './components/EditRecipePage';
 import RankingPage from './components/RankingPage';
 import ProfilePage from './components/ProfilePage';
 import NavigationLayout from './components/NavigationLayout';
@@ -30,6 +31,7 @@ const App = () => {
             <Route path='/ranking' element={<RankingPage/>}/>
             <Route path='/profile' element={<ProfilePage/>}/>
             <Route path='/recipe/:id' element={<RecipePage/>}/>
+            <Route path='/recipe/:id/edit' element={<EditRecipePage/>}/>
           </Route>
         </Route>
       </Routes>
