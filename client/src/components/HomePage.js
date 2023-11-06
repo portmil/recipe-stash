@@ -39,18 +39,31 @@ const HomePage = () => {
     filteredRecipes.push(...filteredByCategoryName);
   });
 
-  /* Add a category to activeCatgeories if it isn't there already, remove a category from 
+  /* Add a category to activeCatgeories if it isn't there already, and remove a category from 
      activeCategories if it is there. But keep at least one category in activeCategories */
   const updateActiveCategories = (categoryName) => {
-    if (activeCategories.includes(categoryName)) {
-      if (activeCategories.length !== 1) {
-        const newActiveCategories = [...activeCategories];
-        const index = newActiveCategories.indexOf(categoryName);
+    if (categoryName === 'All') {
+      setActiveCategories(['All']);
+      return;
+    }
+    if (!activeCategories.includes(categoryName)) {
+      /* Remove the 'All' category if a new one is specified */
+      const newActiveCategories = [...activeCategories];
+      const index = newActiveCategories.indexOf('All');
+      if (index !== -1) {
         newActiveCategories.splice(index, 1);
-        setActiveCategories(newActiveCategories);
       }
+      setActiveCategories([...newActiveCategories, categoryName]);
     } else {
-      setActiveCategories([...activeCategories, categoryName]);
+      /* If the active categories are cleared, set them to 'All'  */
+      if (activeCategories.length === 1 && !activeCategories.includes('All')) {
+        setActiveCategories(['All']);
+        return;
+      }
+      const newActiveCategories = [...activeCategories];
+      const index = newActiveCategories.indexOf(categoryName);
+      newActiveCategories.splice(index, 1);
+      setActiveCategories(newActiveCategories);
     }
   };
 
