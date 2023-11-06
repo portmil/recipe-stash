@@ -11,14 +11,51 @@ const HomePage = () => {
   
   const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategories, setActiveCategories] = useState(['All']);
   const [sortBy, setSortBy] = useState('Latest cooking date');
   const [order, setOrder] = useState('Ascending');
 
-  // Filter recipes based on category
-  const filteredRecipes = recipes.filter(r => r.categories.map(cat => cat.name).includes(activeCategory));
+  useEffect(() => {
+    /* The callback function passed to useEffect() cannot be async, so 
+       an immediately invoked function expression has to be used instead */
+    (async () => {
+      try {
+        const recipes = await recipeService.getAll();
+        setRecipes(recipes);
+        const categories = await categoryService.getAll();
+        setCategories(categories);
+      } catch (error) { // Problem connecting to the server
+        console.log(error);
+      }
+    })();
+  }, []);
 
-  // Sort based on ascending order
+  /* Filter recipes based on categories */
+  const filteredRecipes = [];
+  activeCategories.forEach(category => {
+    const filteredByCategoryName = recipes.filter(recipe => {
+      return recipe.categories.map(cat => cat.name).includes(category);
+    });
+    filteredRecipes.push(...filteredByCategoryName);
+  });
+
+  /* Add a category to activeCatgeories if it isn't there already, remove a category from 
+     activeCategories if it is there. But keep at least one category in activeCategories */
+  const updateActiveCategories = (categoryName) => {
+    if (activeCategories.includes(categoryName)) {
+      if (activeCategories.length !== 1) {
+        const newActiveCategories = [...activeCategories];
+        const index = newActiveCategories.indexOf(categoryName);
+        newActiveCategories.splice(index, 1);
+        setActiveCategories(newActiveCategories);
+      }
+    } else {
+      setActiveCategories([...activeCategories, categoryName]);
+    }
+  };
+
+  /* Sort based on ascending order. By default, 
+     the most recently made recipe is displayed last */
   let sortedRecipes;
   switch (sortBy) {
     case 'Alphabetical':
@@ -39,37 +76,22 @@ const HomePage = () => {
     case 'Rating':
       sortedRecipes = filteredRecipes.sort((a, b) => a.rating - b.rating);
       break;
-    default: // by default, the most recently made recipe is displayed last
+    default:
       sortedRecipes = filteredRecipes.sort((a, b) => new Date(a.lastMakingDate) - new Date(b.lastMakingDate));
   }
 
-  // Flip the order if the user has chosen descending order
+  /* Flip the order if the user has chosen descending order */
   const recipesToShow = order === 'Descending' ? sortedRecipes.reverse() : sortedRecipes;
-
-  useEffect(() => {
-    // the callback function passed to useEffect() cannot be async, so 
-    // an immediately invoked function expression has to be used instead
-    (async () => {
-      try {
-        const recipes = await recipeService.getAll();
-        setRecipes(recipes);
-        const categories = await categoryService.getAll();
-        setCategories(categories);
-      } catch (error) { // problem connecting to the server
-        console.log(error);
-      }
-    })();
-  }, []);
 
   const createCategoryCard = (category) => {
     return (
       <div key={category.name} className='category-card'>
         <button
-          className={activeCategory === category.name ? 'icon-background active' : 'icon-background'}
-          onClick={() => setActiveCategory(category.name)}
+          className={activeCategories.includes(category.name) ? 'icon-background active' : 'icon-background'}
+          onClick={() => updateActiveCategories(category.name)}
           key={ category.name }>
           <img
-            className={activeCategory === category.name ? 'category-icon active' : 'category-icon'}
+            className={activeCategories.includes(category.name) ? 'category-icon active' : 'category-icon'}
             src={require(`../graphics/${category.icon}.svg`)}
             alt={`Icon for category '${category.name}'`}
           />
