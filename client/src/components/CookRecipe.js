@@ -3,14 +3,12 @@ import '../styles/CookRecipe.css';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Popup from 'reactjs-popup';
-import { ReactComponent as StarIcon } from '../graphics/star_icon.svg';
+import StarRating from './rateRecipe/StarRating';
 
 const CookRecipe = ({ currentRating }) => {
 
   const [cookingDate, setCookingDate] = useState('');
   const [rating, setRating] = useState(0);
-  const [hoverValue, setHoverValue] = useState(undefined);
-  const stars = Array(5).fill(0);
 
   useEffect (() => {
     const today = new Date();
@@ -18,18 +16,6 @@ const CookRecipe = ({ currentRating }) => {
     setCookingDate(formattedDate);
     setRating(currentRating);
   }, [currentRating]);
-
-  const handleStarClick = value => {
-    setRating(value);
-  };
-
-  const handleMouseOver = newHoverValue => {
-    setHoverValue(newHoverValue);
-  };
-
-  const handleMouseLeave = () => {
-    setHoverValue(undefined);
-  };
 
   const handleConfirm = () => {
     console.log(cookingDate);
@@ -50,18 +36,7 @@ const CookRecipe = ({ currentRating }) => {
               </input>
               <label className='popup-label' htmlFor='rating-container'>Rating</label>
               <div id='rating-container'>
-                {stars.map((_, index) => {
-                  return (
-                    <StarIcon
-                      key={index}
-                      size={24}
-                      onClick={() => handleStarClick(index + 1)}
-                      onMouseOver={() => handleMouseOver(index + 1)}
-                      onMouseLeave={handleMouseLeave}
-                      className={(hoverValue || rating) > index ? 'cook-now-rating filled' : 'cook-now-rating'}
-                    />
-                  );
-                })}
+                <StarRating rating={rating} setRating={setRating} />
               </div>
               <button type='button' id='confirm-btn-popup' className='primary-btn' 
                 onClick={() =>  {
