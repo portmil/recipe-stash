@@ -35,3 +35,8 @@
   margin: 0;
   width: 280px
 }
+
+#rating-container {
+  display: flex;
+  align-items: center;
+}

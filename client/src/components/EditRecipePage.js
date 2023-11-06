@@ -6,6 +6,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ConfirmDeletePopup from './addRecipe/editRecipe/ConfirmDeletePopup';
 import CategorySelection from '../components/addRecipe/CategorySelection.js';
+import StarRating from './rateRecipe/StarRating.js';
 import recipeService from '../services/recipes';
 import categoryService from '../services/categories';
 
@@ -37,6 +38,7 @@ const EditRecipePage = () => {
         setLink(recipe.link);
         setCookingTime(recipe.cookingTime);
         setDescription(recipe.description);
+        setRating(recipe.rating);
         
         // Set the current categories of the recipe
         setAddedCategories(recipe.categories);
@@ -52,6 +54,7 @@ const EditRecipePage = () => {
   const [link, setLink] = useState('');
   const [cookingTime, setCookingTime] = useState(undefined);
   const [description, setDescription] = useState('');
+  const [rating, setRating] = useState(undefined);
 
   /* Categories of the recipe, including new categories */
   const [addedCategories, setAddedCategories] = useState([]);
@@ -75,7 +78,8 @@ const EditRecipePage = () => {
       name,
       link,
       description,
-      cookingTime
+      cookingTime,
+      rating
     };
     const response = await recipeService.editRecipe(recipe.id, updatedRecipe);
     return response;
@@ -231,8 +235,9 @@ const EditRecipePage = () => {
                 }}>
               </textarea>
               {showDescWarning && <p className='edit-recipe-form-error-desc'>{warningMessage}</p>}
-              <div>
-                TODO Rating
+              <div id='rating-container'>
+                <label className='popup-label'>Rating &emsp;</label>
+                <StarRating rating={rating} setRating={setRating} />
               </div>
             </div>
           </div>
