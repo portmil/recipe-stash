@@ -1,5 +1,5 @@
-import '../../../styles/Popup.css';
-import { ReactComponent as TrashIcon } from '../../../graphics/trash.svg';
+import '../../styles/Popup.css';
+import { ReactComponent as TrashIcon } from '../../graphics/trash.svg';
 import PropTypes from 'prop-types';
 import Popup from 'reactjs-popup';
 

@@ -4,19 +4,13 @@ import '../styles/EditRecipePage.css';
 import '../styles/Popup.css';
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import ConfirmDeletePopup from './addRecipe/editRecipe/ConfirmDeletePopup';
+import ConfirmDeletePopup from './editRecipe/ConfirmDeletePopup';
 import CategorySelection from '../components/addRecipe/CategorySelection.js';
 import StarRating from './rateRecipe/StarRating.js';
 import recipeService from '../services/recipes';
 import categoryService from '../services/categories';
+import { maxLengths } from './addRecipe/constants.js';
 
-
-const maxLengths = {
-  recipeName: 40,
-  link: 200,
-  categoryName: 14,
-  description: 2700
-};
 
 const EditRecipePage = () => {
   
