@@ -117,7 +117,7 @@ const EditRecipePage = () => {
       const editedRecipe = await editRecipe();
       await createCategories();
       await updateCategories(editedRecipe.id);
-      navigate(`/recipe/${recipe.id}`);
+      navigate(`/recipe/${recipe.id}`, { state: 'edit' });
     } catch (exception) {
       const e = exception.response.status === 400 ? exception.response.data.error : exception.message;
       setErrorMessage(`Editing a recipe was not successful. ${e}`);

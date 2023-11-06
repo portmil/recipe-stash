@@ -33,8 +33,8 @@ const App = () => {
             <Route element={<SearchRoute/>}> {/* keep search result in context when recipe page is visited */}
               <Route path='/search' element={<SearchPage/>}/>
               <Route path='/recipe/:id' element={<RecipePage/>}/>
+              <Route path='/recipe/:id/edit' element={<EditRecipePage/>}/>
             </Route>
-            <Route path='/recipe/:id/edit' element={<EditRecipePage/>}/>
           </Route>
         </Route>
       </Routes>
