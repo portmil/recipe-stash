@@ -105,7 +105,7 @@
   gap: 15px;
 }
 
-.outline-input-container {
+.category-select {
   width: 260px;
 }
 
@@ -124,7 +124,7 @@
   cursor: pointer;
 }
 
-.category-container {
+.selected-category-container {
   display: flex;
   flex-direction: row;
   gap: 8px;
