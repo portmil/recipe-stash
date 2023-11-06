@@ -52,8 +52,6 @@ const SearchPage = () => {
   /* Filter recipes based on input value.
      Clear recipes when the input value is empty */
   const filterRecipes = (value) => {
-    console.log('testing'.indexOf('test'));
-    console.log('aaatesting'.indexOf('test'));
     const filtered = [];
     if (value) {
       /* Filter by recipe name */

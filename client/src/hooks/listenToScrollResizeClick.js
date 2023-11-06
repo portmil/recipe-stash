@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
-/* A hook to listen to scroll and resize events and 
+/* A hook to listen to scroll, resize and click events and 
    to return an element's position and the window's width */
-const listenToScrollResize = (elementRef) => {
+const listenToScrollResizeClick = (elementRef) => {
 
   const getPosition = () => {
     return {
@@ -23,13 +23,17 @@ const listenToScrollResize = (elementRef) => {
     };
     window.addEventListener('scroll', handleChange);
     window.addEventListener('resize', handleChange);
+    elementRef.current.addEventListener('click', handleChange);
     return () => {
       window.removeEventListener('scroll', handleChange);
       window.removeEventListener('resize', handleChange);
+      if (elementRef.current) {
+        elementRef.current.removeEventListener('click', handleChange);
+      }
     };
   }, []);
   
   return newPosition;
 };
 
-export default listenToScrollResize;
+export default listenToScrollResizeClick;
