@@ -43,6 +43,7 @@
 
 #rating-container {
   display: flex;
-  align-items: center;
   font-size: 18px;
+  width: 100%;
+  justify-content: space-between;
 }

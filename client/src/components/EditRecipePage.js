@@ -231,7 +231,9 @@ const EditRecipePage = () => {
               {showDescWarning && <p className='edit-recipe-form-error-desc'>{warningMessage}</p>}
               <div id='rating-container'>
                 <label>Rating &emsp;</label>
-                <StarRating rating={rating} setRating={setRating} />
+                <div>
+                  <StarRating rating={rating} setRating={setRating} />
+                </div>
               </div>
             </div>
           </div>
