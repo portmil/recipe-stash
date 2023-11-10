@@ -5,9 +5,9 @@
 .popup-overlay {
   background-color: rgba(145.56, 145.56, 145.56, 0.74);
 }
-    
+   
 .content {
-  background-color: #FFFFFF;
+  background-color: var(--background-white);
   border-radius: 40px;
   padding: 30px;
   min-width: 200px;
@@ -88,16 +88,4 @@
   margin-top: 0px;
   max-width: 180px;
   color: var(--red);
-}
-
-@media only screen and (min-width: 1025px) {
-  #sorting-popup-mobile {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  #sorting-popup-desktop {
-    display: none;
-  }
 }
