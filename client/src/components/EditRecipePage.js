@@ -46,9 +46,9 @@ const EditRecipePage = () => {
   /* Properties of the recipe */
   const [name, setName] = useState('');
   const [link, setLink] = useState('');
-  const [cookingTime, setCookingTime] = useState(undefined);
+  const [cookingTime, setCookingTime] = useState('');
   const [description, setDescription] = useState('');
-  const [rating, setRating] = useState(undefined);
+  const [rating, setRating] = useState(0);
 
   /* Categories of the recipe, including new categories */
   const [addedCategories, setAddedCategories] = useState([]);
@@ -230,7 +230,7 @@ const EditRecipePage = () => {
               </textarea>
               {showDescWarning && <p className='edit-recipe-form-error-desc'>{warningMessage}</p>}
               <div id='rating-container'>
-                <label className='popup-label'>Rating &emsp;</label>
+                <label>Rating &emsp;</label>
                 <StarRating rating={rating} setRating={setRating} />
               </div>
             </div>

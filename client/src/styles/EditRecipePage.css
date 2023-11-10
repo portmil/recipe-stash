@@ -8,6 +8,11 @@
   margin-left: auto;
 }
 
+#confirm-del-popup-text {
+  font-size: 18px;
+  text-align: center;
+}
+
 /* Form layout: */
 #edit-recipe-header {
   margin: 20px;
@@ -33,10 +38,11 @@
   font-size: 16px;
   color: var(--red);
   margin: 0;
-  width: 280px
+  width: 250px
 }
 
 #rating-container {
   display: flex;
   align-items: center;
+  font-size: 18px;
 }

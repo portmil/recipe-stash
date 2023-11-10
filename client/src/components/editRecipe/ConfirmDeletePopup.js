@@ -17,7 +17,7 @@ const ConfirmDeletePopup = ({deleteRecipe}) => {
       { close => (
         <div className='content'>
           <div className='popup-container'>
-            <p style={{fontSize: '18px'}}>Delete recipe?</p>
+            <p id='confirm-del-popup-text'>Are you sure you want to <br/> delete this recipe?</p>
             <button type='button' id='confirm-btn-popup' className='primary-btn' 
               onClick={() => deleteRecipe()}>
               DELETE
