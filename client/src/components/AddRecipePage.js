@@ -6,13 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import CategorySelection from '../components/addRecipe/CategorySelection.js';
 import recipeService from '../services/recipes';
 import categoryService from '../services/categories';
+import { maxLengths } from './addRecipe/constants.js';
 
-const maxLengths = {
-  recipeName: 40,
-  link: 200,
-  categoryName: 14,
-  description: 2700
-};
 
 const AddRecipePage = () => {
 
