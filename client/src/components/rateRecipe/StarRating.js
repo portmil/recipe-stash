@@ -1,4 +1,4 @@
-import '../../styles/CookRecipe.css';
+import '../../styles/StarRating.css';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as StarIcon } from '../../graphics/star_icon.svg';

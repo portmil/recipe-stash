@@ -1,10 +1,9 @@
 import '../styles/App.css';
 import '../styles/RecipePage.css';
 import '../styles/HomePage.css';
-import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import recipeService from '../services/recipes';
-import { useParams } from 'react-router-dom';
 import { ReactComponent as BackIcon } from '../graphics/back_icon.svg';
 import { ReactComponent as EditIcon } from '../graphics/edit_icon.svg';
 import { ReactComponent as StarIcon } from '../graphics/star_icon.svg';
@@ -15,6 +14,8 @@ const RecipePage = () => {
   const {id} = useParams();
 
   const navigate = useNavigate();
+  const previousLocation = useLocation();
+
   const [recipe, setRecipe] = useState({});
   const [error, setError] = useState(false);
 
@@ -107,10 +108,18 @@ const RecipePage = () => {
       { error ? showError() :
         <>
           <div className='icon-container'>
-            <button className='icon-button' onClick={() => navigate(-1)} >
+            <button className='icon-button' onClick={() => {
+              if (previousLocation.state === 'edit') {
+                /* after confirmed edit, navigate three pages back (to home/search)
+                to avoid ending back at the edit page */
+                navigate(-3);
+              } else {
+                navigate(-1);
+              }
+            }} >
               <BackIcon className='icon'/>
             </button>
-            <button className='icon-button'>
+            <button className='icon-button' onClick={() => navigate(`/recipe/${recipe.id}/edit`)} >
               <EditIcon className='icon'/>
             </button>
           </div>
@@ -132,7 +141,7 @@ const RecipePage = () => {
             {recipe.cookingTime && 
               <div className='attribute-container'>
                 <h3>Cooking time</h3>
-                <p className='attribute-text'>{recipe.cookingTimen} minutes</p>
+                <p className='attribute-text'>{recipe.cookingTime} minutes</p>
               </div>}
             {recipe.description && 
               <div className='attribute-container'>

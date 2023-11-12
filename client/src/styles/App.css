@@ -36,8 +36,17 @@ h2 {
   font-weight: lighter;
 }
 
+h3 {
+  font-family: 'Poetsen One';
+  font-weight: lighter;
+}
+
 p {
   font-family: 'Open Sans';
+}
+
+button {
+  cursor: pointer;
 }
 
 .primary-btn {
