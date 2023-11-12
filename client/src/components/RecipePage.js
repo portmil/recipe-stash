@@ -150,7 +150,7 @@ const RecipePage = () => {
               </div>}
             {createCookingDate()}
           </div>
-          <CookRecipe currentRating={recipe.rating} />
+          <CookRecipe currentRating={recipe.rating} id={recipe.id}/>
         </>
       }
     </div>

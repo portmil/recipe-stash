@@ -1,25 +1,44 @@
 import '../styles/Popup.css';
 import '../styles/CookRecipe.css';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Popup from 'reactjs-popup';
 import StarRating from './rateRecipe/StarRating';
+import recipeService from '../services/recipes';
 
-const CookRecipe = ({ currentRating }) => {
+const CookRecipe = ({ currentRating, id }) => {
 
-  const [cookingDate, setCookingDate] = useState('');
+  const navigate = useNavigate();
+
+  const [lastMakingDate, setLastMakingDate] = useState('');
   const [rating, setRating] = useState(0);
+  var formattedDate;
 
   useEffect (() => {
     const today = new Date();
-    const formattedDate = today.toISOString().slice(0, 10);
-    setCookingDate(formattedDate);
+    formattedDate = today.toISOString().slice(0, 10);
+    setLastMakingDate(formattedDate);
     setRating(currentRating);
-  }, [currentRating]);
+  }, [currentRating, id]);
 
-  const handleConfirm = () => {
-    console.log(cookingDate);
-    console.log(rating);
+  const handleConfirm = async () => {
+    console.log(lastMakingDate);
+    try {
+      const updatedRecipe = {
+        lastMakingDate,
+        rating
+      };
+      await recipeService.editRecipe(id, updatedRecipe);
+      navigate(0);
+    } catch (exception) {
+      console.log(exception);
+    }
+  };
+
+  const clearPopup = () => {
+    setLastMakingDate(formattedDate);
+    setRating(currentRating);
   };
 
   return (
@@ -31,8 +50,8 @@ const CookRecipe = ({ currentRating }) => {
               <label className='popup-label' htmlFor='cooking-date-input'>Cooking date</label>
               <input className='outline-input' name='cooking-date' type='date'
                 id='cooking-date-input'
-                value={cookingDate}
-                onChange={(e) => setCookingDate(e.target.value)}>
+                value={lastMakingDate}
+                onChange={(e) => setLastMakingDate(e.target.value)}>
               </input>
               <label className='popup-label' htmlFor='rating-container'>Rating</label>
               <div id='rating-container'>
@@ -46,6 +65,7 @@ const CookRecipe = ({ currentRating }) => {
                 CONFIRM
               </button>
               <button type='button' className='secondary-btn' onClick={() => {
+                clearPopup();
                 close();
               }}>
                 CANCEL
@@ -60,7 +80,8 @@ const CookRecipe = ({ currentRating }) => {
 
 
 CookRecipe.propTypes = {
-  currentRating: PropTypes.number
+  currentRating: PropTypes.number,
+  id: PropTypes.string
 };
 
 export default CookRecipe;
