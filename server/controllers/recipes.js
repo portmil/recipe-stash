@@ -89,10 +89,10 @@ recipesRouter.put('/:id', async (request, response, next) => {
       return response.status(403).json({ error: 'invalid user' })
     }
     
-    const { name, link, description, cookingTime, rating } = request.body
+    const { name, link, description, cookingTime, rating, lastMakingDate } = request.body
     const updatedRecipe = await Recipe.findByIdAndUpdate(
       request.params.id,
-      { name, link, description, cookingTime, rating },
+      { name, link, description, cookingTime, rating, lastMakingDate },
       { new: true, runValidators: true, context: 'query' }
     )
     response.json(updatedRecipe)
