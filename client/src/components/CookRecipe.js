@@ -13,11 +13,10 @@ const CookRecipe = ({ currentRating, id }) => {
 
   const [lastMakingDate, setLastMakingDate] = useState('');
   const [rating, setRating] = useState(0);
-  var formattedDate;
 
   useEffect (() => {
     const today = new Date();
-    formattedDate = today.toISOString().slice(0, 10);
+    const formattedDate = today.toISOString().slice(0, 10);
     setLastMakingDate(formattedDate);
     setRating(currentRating);
   }, [currentRating, id]);
@@ -37,6 +36,8 @@ const CookRecipe = ({ currentRating, id }) => {
   };
 
   const clearPopup = () => {
+    const today = new Date();
+    const formattedDate = today.toISOString().slice(0, 10);
     setLastMakingDate(formattedDate);
     setRating(currentRating);
   };
@@ -53,8 +54,8 @@ const CookRecipe = ({ currentRating, id }) => {
                 value={lastMakingDate}
                 onChange={(e) => setLastMakingDate(e.target.value)}>
               </input>
-              <label className='popup-label' htmlFor='rating-container'>Rating</label>
-              <div id='rating-container'>
+              <label className='popup-label' htmlFor='rating-container-cook'>Rating</label>
+              <div id='rating-container-cook'>
                 <StarRating rating={rating} setRating={setRating} />
               </div>
               <button type='button' id='confirm-btn-popup' className='primary-btn' 
