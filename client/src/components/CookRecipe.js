@@ -19,10 +19,9 @@ const CookRecipe = ({ currentRating, id }) => {
     const formattedDate = today.toISOString().slice(0, 10);
     setLastMakingDate(formattedDate);
     setRating(currentRating);
-  }, [currentRating, id]);
+  }, [currentRating]);
 
   const handleConfirm = async () => {
-    console.log(lastMakingDate);
     try {
       const updatedRecipe = {
         lastMakingDate,
