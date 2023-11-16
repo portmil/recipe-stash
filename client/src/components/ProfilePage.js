@@ -1,5 +1,6 @@
 import '../styles/App.css';
 import '../styles/ProfilePage.css';
+import 'react-tooltip/dist/react-tooltip.css';
 import { useNavigate } from 'react-router-dom';
 import { React, useState, useEffect } from 'react';
 import LogoutIcon from '../graphics/logout_icon.svg';
@@ -7,6 +8,7 @@ import { ReactComponent as UserIcon } from '../graphics/user_icon.svg';
 import { ReactComponent as RecipesAddedIcon } from '../graphics/recipes_added_icon.svg';
 import { ReactComponent as RecipesCookedIcon } from '../graphics/recipes_cooked_icon.svg';
 import recipeService from '../services/recipes.js';
+import { Tooltip } from 'react-tooltip';
 
 const ProfilePage = () => {
 
@@ -40,7 +42,9 @@ const ProfilePage = () => {
 
   return (
     <div className='profile-page-container'>
-      <button className='logout-button' onClick={handleLogout}>
+      <button className='logout-button' onClick={handleLogout}
+        data-tooltip-id="my-tooltip" data-tooltip-content="Logout">
+        <Tooltip id="my-tooltip" place='bottom'/>
         <img 
           src={LogoutIcon} 
           alt={'Logout icon'}
