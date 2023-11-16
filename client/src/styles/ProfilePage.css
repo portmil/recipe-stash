@@ -1,0 +1,120 @@
+.profile-page-container {
+  display: flex;
+  flex-direction: column;
+  margin: 45px auto 0px auto
+}
+
+.logout-button {
+  display: flex;
+  border: 1.5px black solid;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: var(--background-white);
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  align-self: flex-end;
+  position: absolute;
+  top: 30px;
+  left: auto;
+}
+
+.logout-button:hover {
+  top: 29px;
+  width: 46px;
+  height: 46px;
+}
+
+.logout-button:hover img {
+  width: 33px;
+}
+
+.user-text {
+  margin: 10px 0px; 
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.user-recipe-info {
+  display: flex;
+  flex-direction: row;
+  gap: 20px
+}
+
+.summary-box {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--green);
+  width: 140px;
+  height: 200px;
+  border-radius: 20px;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.user-recipe-icon {
+  margin-bottom: 5px;
+}
+
+.user-recipe-text {
+  color: #FFFFFF;
+  margin: 0px;
+}
+
+@media only screen and (max-width: 460px) {
+
+  .user-recipe-info {
+    gap: 15px
+  }
+  .summary-box {
+    height: 45vw;
+    width: 30vw;
+    gap: 6px;
+  }
+    
+}
+
+@media only screen and (max-width: 400px) {
+
+  .summary-box {
+    height: 50vw;
+  }
+  .profile-page-container {
+    display: flex;
+    flex-direction: column;
+    margin: 55px auto 0px auto
+  }
+    
+}
+
+@media only screen and (min-width: 1025px) { 
+
+  .profile-page-container {
+    margin: 70px auto 0px auto
+  }
+  .logout-button {
+    top: 50px;
+  } 
+  .logout-button:hover {
+    top: 49px;
+  }
+  .logout-button {
+    margin-right: -10vw;
+  }
+}
+
+@media only screen and (min-width: 1300px) { 
+
+  .logout-button {
+    margin-right: -260px;
+  }
+}
