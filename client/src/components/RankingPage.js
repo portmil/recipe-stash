@@ -8,7 +8,7 @@ import categoryService from '../services/categories';
 import RankingList from './ranking/RankingList';
 import { ReactComponent as RankingGraphic } from '../graphics/ranking_graphic.svg';
 import ToggleEdit from './ranking/ToggleEdit';
-//<p className='ranking-info'>Begin ranking recipes by switching on edit mode. Then drag and drop recipes from the unranked column to the ranked column. </p>
+import RankingInfo from './ranking/RankingInfo';
 
 const RankingPage = () => {
 
@@ -127,9 +127,7 @@ const RankingPage = () => {
       </div>
       <div className='ranking-info-container'>
         <ToggleEdit isDragDisabled={isDragDisabled} setIsDragDisabled={setIsDragDisabled}/>
-        <button className='info-icon-button'>
-          <h2 className='info-icon'>i</h2>
-        </button>
+        <RankingInfo/>
       </div>
       <div className='ranking-lists-container'>
         <DragDropContext onDragEnd={onDragEnd}>

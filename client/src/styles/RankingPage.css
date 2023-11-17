@@ -25,6 +25,8 @@
   flex-direction: row;
   text-align: left;
   justify-content: space-between;
+  margin-top: 20px;
+  margin-right: 20px;
 }
 
 .ranking-info {
@@ -51,9 +53,24 @@
   margin: auto;
 }
 
+.popup-container.ranking {
+  width: 200px;
+}
+
+.ranking-info-text {
+  margin: 0px;
+  font-size: 16px;
+}
+
 @media only screen and (min-width: 431px) and (max-width: 1024px) {
   .ranking-page-container {
     margin: 40px 10vw;
+  }
+  .popup-container.ranking {
+    width: 250px;
+  }
+  .ranking-info-text {
+    font-size: 18px;
   }
 }
 
@@ -77,5 +94,14 @@
   }
   .ranking-lists-container {
     flex-direction: row;
+  }
+  .popup-container.ranking {
+    width: 300px;
+  }
+  .ranking-info-text {
+    font-size: 18px;
+  }
+  .ranking-info-container {
+    margin-top: 5px;
   }
 }
