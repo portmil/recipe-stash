@@ -14,7 +14,7 @@
   flex-direction: row;
   gap: 15px;
   cursor: pointer;
-  min-width: 230px;
+  min-width: 200px;
 }
   
 .recipe-card p {

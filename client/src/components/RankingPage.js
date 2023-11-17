@@ -6,6 +6,9 @@ import { DragDropContext } from '@hello-pangea/dnd';
 import recipeService from '../services/recipes';
 import categoryService from '../services/categories';
 import RankingList from './ranking/RankingList';
+import { ReactComponent as RankingGraphic } from '../graphics/ranking_graphic.svg';
+import ToggleEdit from './ranking/ToggleEdit';
+//<p className='ranking-info'>Begin ranking recipes by switching on edit mode. Then drag and drop recipes from the unranked column to the ranked column. </p>
 
 const RankingPage = () => {
 
@@ -114,6 +117,7 @@ const RankingPage = () => {
     <div className='App ranking-page-container'>
       <div className='header-container'>
         <h1>Ranking</h1>
+        <RankingGraphic id='ranking-page-graphic'/>
       </div>
       <div className='header-container'>
         <h2>Categories</h2>
@@ -121,11 +125,12 @@ const RankingPage = () => {
       <div className='categories-container'>
         {categories.map(category => createCategoryCard(category))}
       </div>
-      <button type='button' className={isDragDisabled ? 'secondary-btn' : 'primary-btn'} onClick={() => {
-        setIsDragDisabled(!isDragDisabled);
-      }}>
-        {`Edit mode: ${isDragDisabled ? 'OFF' : 'ON'}`}
-      </button>
+      <div className='ranking-info-container'>
+        <ToggleEdit isDragDisabled={isDragDisabled} setIsDragDisabled={setIsDragDisabled}/>
+        <button className='info-icon-button'>
+          <h2 className='info-icon'>i</h2>
+        </button>
+      </div>
       <div className='ranking-lists-container'>
         <DragDropContext onDragEnd={onDragEnd}>
           <div className='ranking-list-container'>
@@ -137,7 +142,6 @@ const RankingPage = () => {
           <div className='ranking-list-container'>
             <div className='header-container'>
               <h2>Unranked</h2>
-              <h2>i</h2> {/* TODO: info button */}
             </div>
             <RankingList name={'unranked'} recipes={filteredRecipes.unranked} isDragDisabled={isDragDisabled} />
           </div>
