@@ -48,7 +48,7 @@
   cursor:auto;
 }
 
-.rating-container {
+.rating-container-cook {
   width: 75px;
   min-width: 75px;
   height: 130px;
@@ -111,7 +111,7 @@
   .category-card {
     width: 75px;
   }
-  .rating-container {
+  .rating-container-cook {
     width: 65px;
     min-width: 65px;
     padding-top: 15px;

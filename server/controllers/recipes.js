@@ -77,6 +77,32 @@ recipesRouter.post('/', async (request, response, next) => {
 })
 
 
+recipesRouter.put('/:id', async (request, response, next) => {
+  const user = request.user
+  if (!user) {
+    return response.status(401).json({ error: 'invalid user: no token provided' })
+  }
+
+  try {
+    const recipe = await Recipe.findById(request.params.id)
+    if (recipe.userId.toString() !== user.id.toString()) {
+      return response.status(403).json({ error: 'invalid user' })
+    }
+    
+    const { name, link, description, cookingTime, rating, lastMakingDate } = request.body
+    const updatedRecipe = await Recipe.findByIdAndUpdate(
+      request.params.id,
+      { name, link, description, cookingTime, rating, lastMakingDate },
+      { new: true, runValidators: true, context: 'query' }
+    )
+    response.json(updatedRecipe)
+
+  } catch (error) {
+    next(error) // give error to error handler middleware
+  }
+})
+
+
 recipesRouter.delete('/:id', async (request, response, next) => {
   const user = request.user
   const idToDelete = request.params.id
