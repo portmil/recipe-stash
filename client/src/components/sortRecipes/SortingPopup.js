@@ -12,12 +12,13 @@ import listenToScrollResizeClick from '../../hooks/listenToScrollResizeClick';
 sorting settings for the recipes displayed in the home page */
 
 const SortingPopup = ({ 
+  sortRecipes,
   sortBy,
   setSortBy,
   order,
   setOrder }) => {
     
-  const sortOptions = ['Alphabetical', 'Cooking time', 'Latest cooking date', 'Ranking', 'Rating'];
+  const sortOptions = ['Alphabetical', 'Cooking time', 'Latest cooking date', 'Rating'];
   const dirOptions = ['Ascending', 'Descending'];
 
   /* Temporary variables for setting the select elements,
@@ -26,6 +27,9 @@ const SortingPopup = ({
   const [orderOption, setOrderOption] = useState(order);
 
   const updateSort = () => {
+    /* Use the options right away to complete sorting, 
+       but also store them to the state */
+    sortRecipes(sortByOption, orderOption);
     setSortBy(sortByOption);
     setOrder(orderOption);
   };
@@ -94,6 +98,7 @@ const SortingPopup = ({
 };
 
 SortingPopup.propTypes = {
+  sortRecipes: PropTypes.func,
   sortBy: PropTypes.string,
   setSortBy: PropTypes.func,
   order: PropTypes.string,
