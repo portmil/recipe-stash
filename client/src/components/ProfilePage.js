@@ -42,6 +42,31 @@ const ProfilePage = () => {
 
   return (
     <div className='profile-page-container'>
+      <div className='user-info-container'>
+        <div className='user-info'>
+          <UserIcon/>
+          <div className='user-text-container'>
+            <h1 className='user-text'>{user.name}</h1>
+            <p className='user-text'>{user.email}</p>
+          </div>
+        </div>
+        <div className='user-recipe-info'>
+          <div className='summary-box'>
+            <RecipesAddedIcon className='user-recipe-icon'/>
+            <p className='user-recipe-text'>{recipes.length}</p>
+            <p className='user-recipe-text'>
+              Recipes<br/>added
+            </p>
+          </div>
+          <div className='summary-box'>
+            <RecipesCookedIcon className='user-recipe-icon'/>
+            <p className='user-recipe-text'>{cookedRecipes.length}</p>
+            <p className='user-recipe-text'>
+              Recipes<br/>cooked
+            </p>
+          </div>
+        </div>
+      </div>
       <button className='logout-button' onClick={handleLogout}
         data-tooltip-id="my-tooltip" data-tooltip-content="Logout">
         <Tooltip id="my-tooltip" place='bottom'/>
@@ -50,29 +75,6 @@ const ProfilePage = () => {
           alt={'Logout icon'}
         />
       </button>
-      <div className='user-info'>
-        <UserIcon/>
-        <div className='user-text-container'>
-          <h1 className='user-text'>{user.name}</h1>
-          <p className='user-text'>{user.email}</p>
-        </div>
-      </div>
-      <div className='user-recipe-info'>
-        <div className='summary-box'>
-          <RecipesAddedIcon className='user-recipe-icon'/>
-          <p className='user-recipe-text'>{recipes.length}</p>
-          <p className='user-recipe-text'>
-            Recipes<br/>added
-          </p>
-        </div>
-        <div className='summary-box'>
-          <RecipesCookedIcon className='user-recipe-icon'/>
-          <p className='user-recipe-text'>{cookedRecipes.length}</p>
-          <p className='user-recipe-text'>
-            Recipes<br/>cooked
-          </p>
-        </div>
-      </div>
     </div>
   );
 };

@@ -15,14 +15,15 @@
   width: 44px;
   align-self: flex-end;
   position: absolute;
-  top: 30px;
+  top: 35px;
   left: auto;
 }
 
 .logout-button:hover {
-  top: 29px;
+  top: 34px;
   width: 46px;
   height: 46px;
+  margin-right: -1px;
 }
 
 .logout-button:hover img {
@@ -99,22 +100,20 @@
 @media only screen and (min-width: 1025px) { 
 
   .profile-page-container {
-    margin: 70px auto 0px auto
+    display: flex;
+    flex-direction: row;
+    align-items: space-between;
+    margin: 45px auto 0px 10vw
+  }
+
+  .logout-button {
+    right: 10vw;
   }
   .logout-button {
     top: 50px;
   } 
   .logout-button:hover {
     top: 49px;
-  }
-  .logout-button {
-    margin-right: -10vw;
-  }
-}
-
-@media only screen and (min-width: 1300px) { 
-
-  .logout-button {
-    margin-right: -260px;
+    margin-right: -1px;
   }
 }
