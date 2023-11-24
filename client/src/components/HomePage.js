@@ -3,6 +3,7 @@ import '../styles/HomePage.css';
 import homeGraphic from '../graphics/home_page_graphic.svg';
 import SortingPopup from './sortRecipes/SortingPopup';
 import React, { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import recipeService from '../services/recipes';
 import categoryService from '../services/categories';
 import RecipeCard from './recipeInfo/RecipeCard';
@@ -15,23 +16,28 @@ const HomePage = () => {
   
   const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [sortedRecipes, setSortedRecipes] = useState([]);
-  const [activeCategories, setActiveCategories] = useState(['All']);
-  const [sortBy, setSortBy] = useState('Latest cooking date');
-  const [order, setOrder] = useState('Ascending');
+
+  const { 
+    filteredRecipes, setFilteredRecipes,
+    activeCategories, setActiveCategories,
+    sortBy, setSortBy,
+    order, setOrder,  
+  } = useOutletContext();
 
   useEffect(() => {
     /* The callback function passed to useEffect() cannot be async, so 
        an immediately invoked function expression has to be used instead */
     (async () => {
       try {
+        /* Get all recipes and categories, set the filtered and sorted recipes 
+           based on 'activeCategories', 'sortBy' and 'order' */
         const recipes = await recipeService.getAll();
         setRecipes(recipes);
-        setFilteredRecipes(recipes);
-        setSortedRecipes(sortRecipes(sortBy, order, recipes));
         const categories = await categoryService.getAll();
         setCategories(categories);
+        const filtered = filterRecipes(activeCategories, recipes);
+        setSortedRecipes(sortRecipes(sortBy, order, filtered));
       } catch (error) { // Problem connecting to the server
         console.log(error);
       }
@@ -72,13 +78,11 @@ const HomePage = () => {
     sortRecipes(sortBy, order, filtered);
   };
 
-  /* Filter recipes based on the active categories.
-  Since sorting can happen directly after sorting, filtered recipes are passed
-     on to other functions. */
-  const filterRecipes = (actives) => {
+  /* Filter recipes based on the active categories */
+  const filterRecipes = (actives, currentRecipes = recipes) => {
     const filtered = [];
     actives.forEach(category => {
-      const filteredByCategoryName = recipes.filter(recipe => {
+      const filteredByCategoryName = currentRecipes.filter(recipe => {
         return recipe.categories.map(cat => cat.name).includes(category);
       });
       filtered.push(...filteredByCategoryName);
@@ -91,15 +95,13 @@ const HomePage = () => {
 
   /* Sort based on ascending order. By default, 
      the most recently made recipe is displayed last */
-  const sortRecipes = (sortByOption, orderOption, filtered) => {
-    const currentFiltered = filtered ? filtered : filteredRecipes;
+  const sortRecipes = (sortByOption, orderOption, currentFiltered = filteredRecipes) => {
     let sorted = [];
     switch (sortByOption) {
       case 'Alphabetical':
         sorted = currentFiltered.sort((a, b) => a.name.localeCompare(b.name));
         break;
       case 'Cooking time':
-        console.log('here?');
         sorted = currentFiltered.sort((a, b) =>
           (typeof a.cookingTime === 'number' ? a.cookingTime : Infinity) -
           (typeof b.cookingTime === 'number' ? b.cookingTime : Infinity)

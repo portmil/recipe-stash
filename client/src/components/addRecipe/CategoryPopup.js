@@ -106,7 +106,7 @@ const CategoryPopup = ({
 
   return (
     <Popup trigger={ <button type='button' id='add-category-btn' 
-      onClick={(event) => event.preventDefault()}>+ Add new category</button> } modal nested>
+      onClick={(event) => event.preventDefault()}>+ Create new category</button> } modal nested>
       { close => (
         <div className='modal'>
           <div className='content'>

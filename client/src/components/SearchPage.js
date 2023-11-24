@@ -1,7 +1,6 @@
 import '../styles/App.css';
 import '../styles/SearchPage.css';
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
 import { ReactComponent as SearchIcon } from '../graphics/search_icon.svg';
 import RecipeCard from './recipeInfo/RecipeCard';
 import recipeService from '../services/recipes';
@@ -9,15 +8,10 @@ import categoryService from '../services/categories';
 
 const SearchPage = () => {
 
-  const navigate = useNavigate();
-
   const [allRecipes, setAllRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
-
-  const { 
-    searchValue, setSearchValue,
-    filteredRecipes, setFilteredRecipes 
-  } = useOutletContext();
+  const [searchValue, setSearchValue] = useState('');
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
 
   useEffect (() => {
     /* The callback function passed to useEffect() cannot be async, so 
@@ -88,8 +82,11 @@ const SearchPage = () => {
           </input>
           <SearchIcon id='search-input-icon'/>
         </div>
-        <button type='button' className='secondary-btn' onClick={() => navigate(-1)}>
-          CANCEL
+        <button type='button' className='secondary-btn' onClick={() => {
+          setSearchValue('');
+          setFilteredRecipes([]);
+        }}>
+          CLEAR
         </button>
       </div>
       <div className='recipe-container'>
