@@ -48,10 +48,15 @@
   cursor:auto;
 }
 
-.rating-container-cook {
+.rating-container {
   width: 75px;
   min-width: 75px;
   height: 130px;
+}
+
+#rating-container-cook {
+  display: flex;
+  gap: 4px;
 }
 
 .star-rating {
@@ -111,7 +116,7 @@
   .category-card {
     width: 75px;
   }
-  .rating-container-cook {
+  .rating-container {
     width: 65px;
     min-width: 65px;
     padding-top: 15px;
