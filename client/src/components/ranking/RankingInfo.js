@@ -16,11 +16,8 @@ const RankingInfo = () => {
           }}>X</button>
           <div className='popup-container ranking'>
             <p className='ranking-info-text'>Begin ranking recipes by switching on edit mode.</p>
-            <p className='ranking-info-text'>You can rank recipes within the selected category.</p>
             <p className='ranking-info-text'>Then drag and drop recipes from the unranked column to the ranked column.</p>
-            <button type='button' className='primary-btn' onClick={close}>
-              BACK
-            </button>
+            <p className='ranking-info-text'>You can rank recipes within the selected category.</p>
           </div>
         </div>
       )}
