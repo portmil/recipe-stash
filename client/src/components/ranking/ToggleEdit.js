@@ -10,14 +10,13 @@ const ToggleEdit = ({ isDragDisabled, setIsDragDisabled }) => {
 
   return (
     <div className='toggle-container'>
-      <h2 htmlFor='toggle-edit-mode' className='toggle-label'>Edit mode</h2>  
+      <h3 htmlFor='toggle-edit-mode' className='toggle-label'>Edit mode</h3>  
       <label className="toggle-switch">
         <input
           id='toggle-edit-mode'
           type="checkbox"
           checked={!isDragDisabled}
-          onChange={handleToggle}
-        />
+          onChange={handleToggle}/>
         <span className="slider">
         </span>
       </label>

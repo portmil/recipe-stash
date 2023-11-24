@@ -8,8 +8,7 @@ const RankingInfo = () => {
         <h2 className='info-icon'>i</h2>
       </button>
     }
-    modal nested
-    >
+    modal nested>
       { close => (
         <div className='content'>
           <div className='popup-container ranking'>

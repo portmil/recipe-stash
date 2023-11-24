@@ -1,19 +1,19 @@
 .outline-input.cooking-date {
-    width: 100px;
+  width: 100px;
 }
 
 .popup-label {
-    font-size: 18px;
-    font-family: 'Open Sans';
-    font-weight: 600;
-  }
+  font-size: 18px;
+  font-family: 'Open Sans';
+  font-weight: 600;
+}
 
 .cook-now-rating {
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 
 .cook-now-rating.filled {
-    fill: var(--yellow);
+  fill: var(--yellow);
 }

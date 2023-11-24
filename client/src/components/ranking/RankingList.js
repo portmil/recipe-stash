@@ -8,11 +8,11 @@ const RankingList = ({ name, recipes, isDragDisabled }) => {
   const getListStyle = isDraggingOver => ({
     background: isDraggingOver ? '#EF960A' : '',
     transition: 'background 0.4s ease',
-    padding: '20px',
+    padding: '10px',
   });
 
   const getItemStyle = (draggableStyle) => ({
-    paddingBottom: '20px',
+    paddingBottom: '15px',
     ...draggableStyle
   });
   
@@ -22,15 +22,13 @@ const RankingList = ({ name, recipes, isDragDisabled }) => {
         <div
           {...provided.droppableProps}
           ref={provided.innerRef}
-          style={getListStyle(snapshot.isDraggingOver)}
-        >
+          style={getListStyle(snapshot.isDraggingOver)}>
           {recipes.map((recipe, index) => (
             <Draggable
               key={recipe.id}
               draggableId={recipe.id}
               index={index}
-              isDragDisabled={isDragDisabled}
-            >
+              isDragDisabled={isDragDisabled}>
               {(provided) => (
                 <div
                   ref={provided.innerRef}
@@ -38,8 +36,7 @@ const RankingList = ({ name, recipes, isDragDisabled }) => {
                   {...provided.dragHandleProps}
                   style={getItemStyle(
                     provided.draggableProps.style
-                  )}
-                >
+                  )}>
                   <RecipeCard recipe={recipe} key={index}/>
                 </div>
               )}

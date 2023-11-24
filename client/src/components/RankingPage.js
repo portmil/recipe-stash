@@ -54,13 +54,11 @@ const RankingPage = () => {
         <button
           className={activeCategory.name === category.name ? 'icon-background active' : 'icon-background'}
           onClick={() => setActiveCategory(category)}
-          key={ category.name }
-        >
+          key={ category.name }>
           <img
             className={activeCategory.name === category.name ? 'category-icon active' : 'category-icon'}
             src={require(`../graphics/${category.icon}.svg`)}
-            alt={`Icon for category '${category.name}'`}
-          />
+            alt={`Icon for category '${category.name}'`}/>
         </button>
         <p className='category-text'>{category.name}</p>
       </div>
