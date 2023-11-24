@@ -49,11 +49,23 @@
   margin-top: 4px;
 }
 
+.info-icon-button:hover {
+  height: 37.5px;
+  width: 37.5px;
+  margin-top: 3.5px;
+  margin-right: -0.5px;
+}
+
+.info-icon-button:hover > .info-icon {
+  font-size: 22px;
+}
+
 .info-icon {
   margin: auto;
 }
 
 .popup-container.ranking {
+  margin-top: 60px;
   width: 200px;
 }
 
@@ -78,6 +90,9 @@
   .info-icon-button {
     margin-top: 10px;
   }
+  .info-icon-button:hover {
+    margin-top: 9.5px;
+  }
 }
 
 @media only screen and (min-width: 550px) {
@@ -94,10 +109,10 @@
   }
   .ranking-lists-container {
     flex-direction: row;
-    gap: 5px;
+    justify-content: space-between;
   }
   .ranking-list-container {
-    width: 49%;
+    width: 49.5%;
   }
   .popup-container.ranking {
     width: 300px;
