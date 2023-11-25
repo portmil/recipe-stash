@@ -125,20 +125,22 @@ const CategoryPopup = ({
                 </input>
                 <label htmlFor='category-name'>Category name</label>
               </div>
-              <div className="dropdown">
-                <div className='popup-outline-input-container'>
-                  <select id='category-icon' onClick={toggleDropdown}>
-                    {/* This option is not a real option, but it is used to define 
-                        the drop down menu's label. A select element is used to provide 
-                        the drop down menu the same style as a select element */}
-                    <option value="" hidden>{selectedIcon ? selectedIcon.name : 'Select an icon'}</option>
-                  </select>
-                </div>
-                {/* The actual drop down menu: */}
+              <div className='dropdown'>
+                {/* An button with a custom arrow to make it look similar to a select element */}
+                <button className='category-icon-selection ' onClick={toggleDropdown}>
+                  {selectedIcon ? selectedIcon.name : 'Select an icon'}
+                  <div id='select-arrow'/>
+                </button>
+                {/* The actual drop down menu. Use tabIndex and onKeyDown for accessibility */}
                 <ul className={`dropdown-menu ${isDropdownOpen ? 'open' : ''}`}>
                   { extraIconsWithNames.map((icon, index) => {
                     return (
-                      <li key={index} onClick={() => selectIcon(icon)}>
+                      <li tabIndex={0} key={index} onClick={() => selectIcon(icon)}
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            selectIcon(icon);
+                          }
+                        }}>
                         <CategoryIcon category={icon} width={25}/>
                       </li>
                     );})}

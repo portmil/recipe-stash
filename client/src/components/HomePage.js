@@ -80,13 +80,13 @@ const HomePage = () => {
 
   /* Filter recipes based on the active categories */
   const filterRecipes = (actives, currentRecipes = recipes) => {
-    const filtered = [];
-    actives.forEach(category => {
-      const filteredByCategoryName = currentRecipes.filter(recipe => {
-        return recipe.categories.map(cat => cat.name).includes(category);
-      });
-      filtered.push(...filteredByCategoryName);
+    //const filtered = [];
+    const filteredByCategoryName = currentRecipes.filter(recipe => {
+      return actives.reduce((accumulator, category) => {
+        return accumulator && recipe.categories.map(cat => cat.name).includes(category);
+      }, true);
     });
+    const filtered = filteredByCategoryName;
     /* Use the 'filtered' value right away to complete sorting, 
        but also store it to the state */
     setFilteredRecipes(filtered);
