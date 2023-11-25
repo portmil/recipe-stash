@@ -20,7 +20,7 @@ const AddRecipePage = () => {
   const [description, setDescription] = useState('');
   const [lastMakingDate, setDate] = useState('');
 
-  /* Specified categories for the recipe, including new catgeories */
+  /* Specified categories for the recipe, including new categories */
   const [addedCategories, setAddedCategories] = useState([]);
 
   const [dateType, setDateType] = useState('text');

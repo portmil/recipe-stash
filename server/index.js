@@ -14,27 +14,3 @@ app.get('/recipes', (request, response) => {
     response.json(recipes)
   })
 })
-
-
-/* Example POST handling */
-/*
-app.post('/recipes', (request, response) => {
-  const body = request.body;
-
-  if (body.name === undefined) {
-    return response.status(400).json({ error: 'Content missing' })
-  }
-
-  const recipe = new Recipe({
-    name: body.name,
-    link: body.link || '',
-    description: body.description || '',
-    rating: body.rating || 1,
-    lastMakingDate: body.lastMakingDate || new Date(),
-  })
-
-  recipe.save().then(savedRecipe => {
-    response.json(savedRecipe)
-  })
-})
-*/

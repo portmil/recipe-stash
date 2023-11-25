@@ -195,8 +195,28 @@
   margin-top: 10px;
 }
 
-#category-icon {
+.category-icon-selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 45px;
+  width: 190px;
+  padding: 0px 20px;
   cursor: pointer;
+  background-color: var(--background-white);
+  font-family: 'Open Sans';
+  font-size: 16px;
+  border-radius: 25px;
+  border: 1.5px black solid;
+}
+
+#select-arrow {
+  border: solid black;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 2.5px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
 }
 
 /* Drop down menu: */
