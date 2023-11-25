@@ -9,8 +9,8 @@ import categoryService from '../services/categories';
 import RecipeCard from './recipeInfo/RecipeCard';
 
 /* Filtering and sorting is enabled on the home page. If the recipes are filtered, they 
-   need to be sorted afterwards. If the recipes are sorted, no other actinos need to be taken.
-   The recipes shown are always sorted, which is why the varibale 'sortedRecipes' is used. */
+   need to be sorted afterwards. If the recipes are sorted, no other actions need to be taken.
+   The recipes shown are always sorted, which is why the variable 'sortedRecipes' is used. */
 
 const HomePage = () => {
   
@@ -44,7 +44,7 @@ const HomePage = () => {
     })();
   }, []);
 
-  /* Add a category to 'activeCatgeories' if it isn't there already, and remove a category from 
+  /* Add a category to 'activeCategories' if it isn't there already, and remove a category from 
      activeCategories if it is there. But keep at least one category in 'activeCategories' */
   const updateActiveCategories = (categoryName) => {
     let actives = [];
@@ -80,13 +80,11 @@ const HomePage = () => {
 
   /* Filter recipes based on the active categories */
   const filterRecipes = (actives, currentRecipes = recipes) => {
-    //const filtered = [];
-    const filteredByCategoryName = currentRecipes.filter(recipe => {
+    const filtered = currentRecipes.filter(recipe => {
       return actives.reduce((accumulator, category) => {
         return accumulator && recipe.categories.map(cat => cat.name).includes(category);
       }, true);
     });
-    const filtered = filteredByCategoryName;
     /* Use the 'filtered' value right away to complete sorting, 
        but also store it to the state */
     setFilteredRecipes(filtered);
