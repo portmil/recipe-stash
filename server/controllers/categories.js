@@ -74,6 +74,37 @@ categoriesRouter.delete('/:id', async (request, response, next) => {
 })
 
 
+// Changing the ranking of recipes in a category
+categoriesRouter.patch('/:id', async (request, response, next) => {
+  const user = request.user
+  if (!user) {
+    return response.status(401).json({ error: 'invalid user: no token provided' })
+  }
+
+  try {
+    const id = request.params.id
+    const category = await Category.findById(id)
+    if (!category) {
+      return response.status(404).json({ error: 'category not found' })
+    }
+    if (category.userId.toString() !== user.id.toString()) {
+      return response.status(401).json({ error: 'invalid user' })
+    }
+
+    const { rankedRecipes, unrankedRecipes } = request.body
+    const updatedCategory = await Category.findByIdAndUpdate(
+      id,
+      { rankedRecipes, unrankedRecipes },
+      { new: true }
+    )
+    response.json(updatedCategory)
+
+  } catch (error) {
+    next(error) // give error to error handler middleware
+  }
+})
+
+
 // Adding recipes to a category
 categoriesRouter.patch('/:id/:recipeId', async (request, response, next) => {
   const user = request.user

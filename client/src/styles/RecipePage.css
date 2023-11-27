@@ -91,9 +91,9 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  overflow: scroll;
   height: 130px;
   overflow-y: hidden;
+  overflow-x: auto; /* hide scrollbar when it is not needed */
 }
 
 @media only screen and (max-width: 400px) {

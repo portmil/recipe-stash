@@ -89,3 +89,23 @@
   max-width: 180px;
   color: var(--red);
 }
+
+.close-popup-button {
+  position: absolute;
+  top: 38px;
+  right: 30px;
+  border: 1.5px black solid;
+  border-radius: 50%;
+  padding: 4px 9px;
+  background-color: var(--background-white);
+  font-family: 'Open Sans';
+  font-weight: 700;
+  font-size: 16px;
+}
+  
+.close-popup-button:hover {
+  padding: 4px 10px;
+  top: 37px;
+  right: 28.5px;
+  font-size: 17.5px;
+}

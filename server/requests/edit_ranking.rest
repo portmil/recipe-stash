@@ -1,0 +1,7 @@
+PATCH  http://localhost:3001/api/categories/CATEGORYID
+Authorization: Bearer TOKEN
+
+{
+  "rankedRecipes": [],
+  "unrankedRecipes": []
+}

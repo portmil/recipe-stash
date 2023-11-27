@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
-  overflow-x: scroll;
+  overflow-x: auto; /* hide scrollbar when it is not needed */
   overflow-y: hidden;
   text-align: center;
   height: 132px;
