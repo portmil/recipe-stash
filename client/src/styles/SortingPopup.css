@@ -17,25 +17,6 @@
   gap: 22px;
 }
 
-.close-popup-button {
-  position: absolute;
-  top: 38px;
-  right: 30px;
-  border: 1.5px black solid;
-  border-radius: 50%;
-  padding: 4px 9px;
-  background-color: var(--background-white);
-  font-family: 'Open Sans';
-  font-weight: 700;
-  font-size: 16px;
-}
-  
-.close-popup-button:hover {
-  top: 37.5px;
-  right: 29.5px;
-  font-size: 17px;
-}
-
 #select-sorting.popup-outline-input-container {
   width: 250px;
 }

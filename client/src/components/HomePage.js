@@ -3,98 +3,120 @@ import '../styles/HomePage.css';
 import homeGraphic from '../graphics/home_page_graphic.svg';
 import SortingPopup from './sortRecipes/SortingPopup';
 import React, { useState, useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
 import recipeService from '../services/recipes';
 import categoryService from '../services/categories';
 import RecipeCard from './recipeInfo/RecipeCard';
+
+/* Filtering and sorting is enabled on the home page. If the recipes are filtered, they 
+   need to be sorted afterwards. If the recipes are sorted, no other actions need to be taken.
+   The recipes shown are always sorted, which is why the variable 'sortedRecipes' is used. */
 
 const HomePage = () => {
   
   const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
-  const [activeCategories, setActiveCategories] = useState(['All']);
-  const [sortBy, setSortBy] = useState('Latest cooking date');
-  const [order, setOrder] = useState('Ascending');
+  const [sortedRecipes, setSortedRecipes] = useState([]);
+
+  const { 
+    filteredRecipes, setFilteredRecipes,
+    activeCategories, setActiveCategories,
+    sortBy, setSortBy,
+    order, setOrder,  
+  } = useOutletContext();
 
   useEffect(() => {
     /* The callback function passed to useEffect() cannot be async, so 
        an immediately invoked function expression has to be used instead */
     (async () => {
       try {
+        /* Get all recipes and categories, set the filtered and sorted recipes 
+           based on 'activeCategories', 'sortBy' and 'order' */
         const recipes = await recipeService.getAll();
         setRecipes(recipes);
         const categories = await categoryService.getAll();
         setCategories(categories);
+        const filtered = filterRecipes(activeCategories, recipes);
+        setSortedRecipes(sortRecipes(sortBy, order, filtered));
       } catch (error) { // Problem connecting to the server
         console.log(error);
       }
     })();
   }, []);
 
-  /* Filter recipes based on categories */
-  const filteredRecipes = [];
-  activeCategories.forEach(category => {
-    const filteredByCategoryName = recipes.filter(recipe => {
-      return recipe.categories.map(cat => cat.name).includes(category);
-    });
-    filteredRecipes.push(...filteredByCategoryName);
-  });
-
-  /* Add a category to activeCatgeories if it isn't there already, and remove a category from 
-     activeCategories if it is there. But keep at least one category in activeCategories */
+  /* Add a category to 'activeCategories' if it isn't there already, and remove a category from 
+     activeCategories if it is there. But keep at least one category in 'activeCategories' */
   const updateActiveCategories = (categoryName) => {
+    let actives = [];
     if (categoryName === 'All') {
-      setActiveCategories(['All']);
-      return;
-    }
-    if (!activeCategories.includes(categoryName)) {
-      /* Remove the 'All' category if a new one is specified */
-      const newActiveCategories = [...activeCategories];
-      const index = newActiveCategories.indexOf('All');
-      if (index !== -1) {
-        newActiveCategories.splice(index, 1);
-      }
-      setActiveCategories([...newActiveCategories, categoryName]);
+      actives = ['All'];
     } else {
-      /* If the active categories are cleared, set them to 'All'  */
-      if (activeCategories.length === 1 && !activeCategories.includes('All')) {
-        setActiveCategories(['All']);
-        return;
+      if (!activeCategories.includes(categoryName)) {
+        /* Remove the 'All' category if a new one is specified */
+        const newActiveCategories = [...activeCategories];
+        const index = newActiveCategories.indexOf('All');
+        if (index !== -1) {
+          newActiveCategories.splice(index, 1);
+        }
+        actives = [...newActiveCategories, categoryName];
+      } else {
+        /* If the active categories are cleared, set them to 'All' */
+        if (activeCategories.length === 1 && !activeCategories.includes('All')) {
+          actives = ['All'];
+        } else {
+          const newActiveCategories = [...activeCategories];
+          const index = newActiveCategories.indexOf(categoryName);
+          newActiveCategories.splice(index, 1);
+          actives = newActiveCategories;
+        }
       }
-      const newActiveCategories = [...activeCategories];
-      const index = newActiveCategories.indexOf(categoryName);
-      newActiveCategories.splice(index, 1);
-      setActiveCategories(newActiveCategories);
     }
+    /* Use the 'actives' value right away to complete filtering, 
+       but also store it to the state */
+    setActiveCategories(actives);
+    const filtered = filterRecipes(actives);
+    sortRecipes(sortBy, order, filtered);
+  };
+
+  /* Filter recipes based on the active categories */
+  const filterRecipes = (actives, currentRecipes = recipes) => {
+    const filtered = currentRecipes.filter(recipe => {
+      return actives.reduce((accumulator, category) => {
+        return accumulator && recipe.categories.map(cat => cat.name).includes(category);
+      }, true);
+    });
+    /* Use the 'filtered' value right away to complete sorting, 
+       but also store it to the state */
+    setFilteredRecipes(filtered);
+    return filtered;
   };
 
   /* Sort based on ascending order. By default, 
      the most recently made recipe is displayed last */
-  let sortedRecipes;
-  switch (sortBy) {
-    case 'Alphabetical':
-      sortedRecipes = filteredRecipes.sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    case 'Cooking time':
-      sortedRecipes = filteredRecipes.sort((a, b) =>
-        (typeof a.cookingTime === 'number' ? a.cookingTime : Infinity) -
-        (typeof b.cookingTime === 'number' ? b.cookingTime : Infinity)
-      );
-      break;
-    case 'Ranking': {
-      const cat = categories.find((cat) => cat.name === activeCategory);
-      const rankOrder = cat.rankedRecipes.concat(cat.unrankedRecipes);
-      sortedRecipes = filteredRecipes.sort((a, b) => rankOrder.indexOf(a.id) - rankOrder.indexOf(b.id));
-      break;
+  const sortRecipes = (sortByOption, orderOption, currentFiltered = filteredRecipes) => {
+    let sorted = [];
+    switch (sortByOption) {
+      case 'Alphabetical':
+        sorted = currentFiltered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'Cooking time':
+        sorted = currentFiltered.sort((a, b) =>
+          (typeof a.cookingTime === 'number' ? a.cookingTime : Infinity) -
+          (typeof b.cookingTime === 'number' ? b.cookingTime : Infinity)
+        );
+        break;
+      case 'Rating':
+        sorted = currentFiltered.sort((a, b) => a.rating - b.rating);
+        break;
+      default:
+        sorted = currentFiltered.sort((a, b) => new Date(a.lastMakingDate) - new Date(b.lastMakingDate));
     }
-    case 'Rating':
-      sortedRecipes = filteredRecipes.sort((a, b) => a.rating - b.rating);
-      break;
-    default:
-      sortedRecipes = filteredRecipes.sort((a, b) => new Date(a.lastMakingDate) - new Date(b.lastMakingDate));
-  }
-
-  /* Flip the order if the user has chosen descending order */
-  const recipesToShow = order === 'Descending' ? sortedRecipes.reverse() : sortedRecipes;
+    /* Flip the order if the user has chosen descending order */
+    const recipesToShow = orderOption === 'Descending' ? sorted.reverse() : sorted;
+    /* Store the 'sorted' value to the state aka the recipes to be showed */
+    setSortedRecipes(recipesToShow);
+    return sorted;
+  };
 
   const createCategoryCard = (category) => {
     return (
@@ -128,10 +150,10 @@ const HomePage = () => {
       </div>
       <div className='header-container'>
         <h2>Recipes</h2>
-        <SortingPopup sortBy={sortBy} setSortBy={setSortBy} order={order} setOrder={setOrder}/>
+        <SortingPopup sortRecipes={sortRecipes} sortBy={sortBy} setSortBy={setSortBy} order={order} setOrder={setOrder}/>
       </div>
       <div className='recipe-container'>
-        {recipesToShow.map((recipe, index) => {
+        {sortedRecipes.map((recipe, index) => {
           return (
             <RecipeCard recipe={recipe} key={index}/>
           );

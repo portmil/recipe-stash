@@ -12,8 +12,8 @@ import RankingPage from './components/RankingPage';
 import ProfilePage from './components/ProfilePage';
 import NavigationLayout from './components/NavigationLayout';
 import RecipePage from './components/RecipePage';
-import SearchRoute from './context/SearchRoute';
 import React from 'react';
+import HomePageRoute from './context/HomePageRoute';
 
 const App = () => {
   return (
@@ -26,12 +26,12 @@ const App = () => {
         </Route>
         <Route element={<PrivateRoute type='users'/>}> {/* pages that are only visible to logged users */}
           <Route element={<NavigationLayout/>}>
-            <Route path='/home' element={<HomePage/>}/>
             <Route path='/add-recipe' element={<AddRecipePage/>}/>
             <Route path='/ranking' element={<RankingPage/>}/>
             <Route path='/profile' element={<ProfilePage/>}/>
-            <Route element={<SearchRoute/>}> {/* keep search result in context when recipe page is visited */}
-              <Route path='/search' element={<SearchPage/>}/>
+            <Route path='/search' element={<SearchPage/>}/>
+            <Route element={<HomePageRoute/>}> {/* save home page context while visiting recipe page */}
+              <Route path='/home' element={<HomePage/>}/>
               <Route path='/recipe/:id' element={<RecipePage/>}/>
               <Route path='/recipe/:id/edit' element={<EditRecipePage/>}/>
             </Route>

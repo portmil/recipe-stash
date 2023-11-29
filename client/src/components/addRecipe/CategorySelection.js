@@ -25,14 +25,14 @@ const CategorySelection = ({
            Don't provide the 'All' category as an option.
            Add a 'Category' option to display the input's label */
         const filteredCategories = data.filter(object => object.name !== 'All');
-        const selectCatgeories = [{name: 'Category'}, ...filteredCategories];
-        setCurrentCategories(selectCatgeories);
+        const selectCategories = [{name: 'Category'}, ...filteredCategories];
+        setCurrentCategories(selectCategories);
       })
       .catch((e) => console.log(e.message));
   }, []);
 
   /* Get the category based on the selected name */
-  const handleAddCatgeory = ({ target }) => {
+  const handleAddCategory = ({ target }) => {
     const category = currentCategories.find(object => object.name === target.value);
     if (!addedCategories.find(object => object.name === category.name)) {
       setCategory(category);
@@ -52,7 +52,7 @@ const CategorySelection = ({
         <select type='category' name='category' placeholder='Category' 
           id='category' 
           value={category}
-          onChange={handleAddCatgeory}>
+          onChange={handleAddCategory}>
           { currentCategories.map((category, index) => {
             return (
               <option value={category.name} key={index}>{category.name}</option>
