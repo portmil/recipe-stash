@@ -1,5 +1,6 @@
 const config = require('./utils/config')
 const express = require("express")
+const path = require('path');
 const app = express()
 const cors = require('cors')
 const recipesRouter = require('./controllers/recipes')
@@ -34,6 +35,23 @@ app.use('/api/categories',
 )
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
+
+app.use(express.static('build'))
+
+const indexPath = path.resolve(__dirname, 'build', 'index.html');
+app.get('/login', (req, res) => res.sendFile(indexPath));
+app.get('/signup', (req, res) => res.sendFile(indexPath));
+app.get('/add-recipe', (req, res) => res.sendFile(indexPath));
+app.get('/ranking', (req, res) => res.sendFile(indexPath));
+app.get('/profile', (req, res) => res.sendFile(indexPath));
+app.get('/search', (req, res) => res.sendFile(indexPath));
+app.get('/home', (req, res) => res.sendFile(indexPath));
+app.get('/recipe/:id', (req, res) => res.sendFile(indexPath));
+app.get('/recipe/:id/edit', (req, res) => res.sendFile(indexPath));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
