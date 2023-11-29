@@ -26,20 +26,24 @@ usersRouter.post('/', async (request, response, next) => {
     const savedUser = await user.save()
 
     // Create default categories on registration
-    const all = new Category({
-      name: 'All',
-      icon: 'all_icon',
-    })
-    const breakfast = new Category({
-      name: 'Breakfast',
-      icon: 'breakfast_icon',
-    })
-    const defaultCats = [all, breakfast]
-    defaultCats.forEach( async (cat) => {
-      cat.isDefault = true
-      cat.userId = savedUser._id
-      await cat.save()
-    })
+    const defaultCategories = [
+      'All',
+      'Breakfast',
+      'Dinner',
+      'Dessert',
+      'Salad',
+      'Soup',
+      'Pasta',
+    ]
+    for (const categoryName of defaultCategories) {
+      const newCategory = new Category({
+        name: categoryName,
+        icon: `${categoryName.toLowerCase()}_icon`,
+        isDefault: true,
+        userId: savedUser._id
+      })
+      await newCategory.save()
+    }
 
     response.status(201).json(savedUser)
   } catch(error) {
