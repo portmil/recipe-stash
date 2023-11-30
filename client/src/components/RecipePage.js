@@ -8,6 +8,7 @@ import { ReactComponent as BackIcon } from '../graphics/back_icon.svg';
 import { ReactComponent as EditIcon } from '../graphics/edit_icon.svg';
 import { ReactComponent as StarIcon } from '../graphics/star_icon.svg';
 import CookRecipe from './CookRecipe';
+import { ReactSVG } from 'react-svg';
 
 const RecipePage = () => {
 
@@ -42,7 +43,7 @@ const RecipePage = () => {
           className={'icon-background active no-pointer'}
           key={ category.name }
         >
-          <img
+          <ReactSVG
             className={'category-icon active'}
             src={require(`../graphics/${category.icon}.svg`)}
             alt={`Icon for category '${category.name}'`}
