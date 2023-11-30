@@ -7,6 +7,7 @@ import { useOutletContext } from 'react-router-dom';
 import recipeService from '../services/recipes';
 import categoryService from '../services/categories';
 import RecipeCard from './recipeInfo/RecipeCard';
+import { ReactSVG } from 'react-svg';
 
 /* Filtering and sorting is enabled on the home page. If the recipes are filtered, they 
    need to be sorted afterwards. If the recipes are sorted, no other actions need to be taken.
@@ -125,7 +126,7 @@ const HomePage = () => {
           className={activeCategories.includes(category.name) ? 'icon-background active' : 'icon-background'}
           onClick={() => updateActiveCategories(category.name)}
           key={ category.name }>
-          <img
+          <ReactSVG 
             className={activeCategories.includes(category.name) ? 'category-icon active' : 'category-icon'}
             src={require(`../graphics/${category.icon}.svg`)}
             alt={`Icon for category '${category.name}'`}

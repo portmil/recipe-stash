@@ -9,6 +9,7 @@ import RankingList from './ranking/RankingList';
 import { ReactComponent as RankingGraphic } from '../graphics/ranking_graphic.svg';
 import ToggleEdit from './ranking/ToggleEdit';
 import RankingInfo from './ranking/RankingInfo';
+import { ReactSVG } from 'react-svg';
 
 const RankingPage = () => {
 
@@ -55,10 +56,11 @@ const RankingPage = () => {
           className={activeCategory.name === category.name ? 'icon-background active' : 'icon-background'}
           onClick={() => setActiveCategory(category)}
           key={ category.name }>
-          <img
+          <ReactSVG 
             className={activeCategory.name === category.name ? 'category-icon active' : 'category-icon'}
             src={require(`../graphics/${category.icon}.svg`)}
-            alt={`Icon for category '${category.name}'`}/>
+            alt={`Icon for category '${category.name}'`}
+          />
         </button>
         <p className='category-text'>{category.name}</p>
       </div>
