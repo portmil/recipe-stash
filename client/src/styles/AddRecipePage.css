@@ -123,6 +123,7 @@
   font-weight: 600;
   align-self: flex-start;
   cursor: pointer;
+  color: black;
 }
 
 .selected-category-container {

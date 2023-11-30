@@ -171,15 +171,6 @@
   }
 }
 
-@media only screen and (max-width: 381px) { 
-
-  .nav-icon {
-    width: 90%;
-    height: auto;
-  }
-
-}
-
 @media only screen and (min-width: 701px) and (max-width: 1200px) { 
 
   .nav-background-fill { width: 40% }

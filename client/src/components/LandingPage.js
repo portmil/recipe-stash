@@ -4,7 +4,7 @@ import landingGraphic from '../graphics/landing_page_graphic.svg';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 
-const introduction = 'Sed do eiusmod tempor ut labore et dolore magna aliqua. Ut enim ad minim veniam.';
+const introduction = 'Recipe Stash is your all in one kitchen companion, where you can effortlessly save and organize your favorite recipes.';
 
 const LandingPage = () => {
 
