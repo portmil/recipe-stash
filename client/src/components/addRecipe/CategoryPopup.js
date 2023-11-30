@@ -141,14 +141,14 @@ const CategoryPopup = ({
                             selectIcon(icon);
                           }
                         }}>
-                        <CategoryIcon category={icon} width={25}/>
+                        <CategoryIcon category={icon}/>
                       </li>
                     );})}
                 </ul>
               </div>
               { selectedIcon && 
                 <div className='own-category-container'>
-                  <CategoryIcon category={selectedIcon} width={25}/>
+                  <CategoryIcon category={selectedIcon}/>
                 </div>
               }
               {showError && <p className='popup-form-error'>{errorMessage}</p>}

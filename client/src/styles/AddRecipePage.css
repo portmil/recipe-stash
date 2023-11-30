@@ -86,7 +86,7 @@
   padding: 10px 15px;
 }
 
-/* Hide arrows on for number input field 
+/* Hide arrows for number input field 
    Chrome, Safari, Edge, Opera */
 .cooking-time-container input::-webkit-outer-spin-button,
 .cooking-time-container input::-webkit-inner-spin-button {
@@ -94,7 +94,7 @@
   margin: 0;
 }
 
-/* Hide arrows on for number input field Firefox */
+/* Hide arrows for number input field Firefox */
 .cooking-time-container input[type=number] {
   -moz-appearance: textfield;
 }
@@ -155,8 +155,8 @@
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-  height: 32px;
-  width: 32px;
+  height: 35px;
+  width: 35px;
   display: flex;
   align-items: center;
   padding: 4px;
@@ -171,9 +171,8 @@
   margin: 0 auto;
   display: block;
   height: auto;
-  /* Width is defined in the JavaScript code, because 
-     for some reason is varies between the pop up 
-     and the selected icons' list if defined here */
+  width: 28px;
+  height: 28px;
 }
 
 .remove-category-btn {
@@ -268,6 +267,7 @@
   max-height: 200px;
   overflow-y: auto;
   border-radius: 4px;
+  width: 90px;
 }
 
 .dropdown-menu.open {
@@ -278,7 +278,7 @@
 .dropdown-menu li {
   display: flex;
   align-items: center;
-  padding: 12px 15px;
+  padding: 11px 11px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }

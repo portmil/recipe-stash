@@ -8,9 +8,18 @@ import { ReactComponent as RankIcon } from '../graphics/rank_icon.svg';
 import { ReactComponent as ProfileIcon } from '../graphics/profile_icon.svg';
 import { ReactComponent as NavBackground } from '../graphics/nav_background.svg';
 import { ReactComponent as AddButton } from '../graphics/add_button.svg';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const NavigationLayout = () => {
+
+  const { pathname } = useLocation();
+
+  /* Automatically scrolls to top whenever pathname changes */
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   return (
     <div id='container'> 
       <nav id='navigation'>

@@ -67,7 +67,7 @@ const CategorySelection = ({
         return (
           <div className='selected-category-container' key={index}>
             <div className='category-info'>
-              <CategoryIcon category={category} width={30}/>
+              <CategoryIcon category={category}/>
               <p className='category-text'>{category.name}</p>
             </div>
             <button type='button' className='remove-category-btn' 

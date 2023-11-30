@@ -120,7 +120,7 @@ button {
 }
 
 select {
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg width='12' height='25' viewBox='0 0 17 10' fill='none' xmlns='http://www.w3.org/2000/svg'><path id='Vector 1' d='M1 1.5L8 8.5L15 1.5' stroke='black' stroke-width='1.5'/></svg>");
   background-repeat: no-repeat;
   background-position-x: 100%;
   background-position-y: 10px;

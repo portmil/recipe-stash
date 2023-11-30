@@ -8,12 +8,11 @@ import PropTypes from 'prop-types';
    If the given category does not have an icon property, 
    the 'All' category icon is displayed. */
 
-const CategoryIcon = ({ category, width }) => {
+const CategoryIcon = ({ category }) => {
   const categoryIcon = category.icon !== null ? category.icon : 'all_icon';
   return (
     <div className='category-icon-background'>
       <img 
-        style={{ width: width, maxHeight: 30 }}
         src={require(`../../graphics/${categoryIcon}.svg`)} 
         alt={`Icon for category '${category.name}'`}
       />
@@ -22,8 +21,7 @@ const CategoryIcon = ({ category, width }) => {
 };
 
 CategoryIcon.propTypes = {
-  category: PropTypes.object,
-  width: PropTypes.number
+  category: PropTypes.object
 };
 
 export default CategoryIcon;

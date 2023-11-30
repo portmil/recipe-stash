@@ -19,12 +19,12 @@
   border-radius: 50%;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
-
 }
 
 .icon {
   margin: 0 auto;
   display: block;
+  width: 100%;
 }
 
 .recipe-title {

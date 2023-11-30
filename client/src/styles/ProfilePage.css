@@ -1,7 +1,7 @@
 .profile-page-container {
   display: flex;
   flex-direction: column;
-  margin: 45px auto 0px auto
+  margin: 30px auto 20px auto
 }
 
 .logout-button {
@@ -15,7 +15,7 @@
   width: 44px;
   align-self: flex-end;
   position: absolute;
-  top: 35px;
+  top: 25px;
   left: auto;
 }
 
