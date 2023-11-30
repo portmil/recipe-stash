@@ -33,14 +33,12 @@ const RankingPage = () => {
     })();
   }, []);
 
-
   /* Filter recipes based on category */
   useEffect(() => {
     /* don't run the effect before data has been fetched from backend */
     if (!activeCategory) {
       return;
     }
-
     const filtered = recipes.filter(r => r.categories.map(cat => cat.name).includes(activeCategory.name));
     setFilteredRecipes({
       ranked: activeCategory.rankedRecipes.map(rId => filtered.find(r => r.id === rId)),
@@ -54,7 +52,13 @@ const RankingPage = () => {
       <div key={category.name} className='category-card'>
         <button
           className={activeCategory.name === category.name ? 'icon-background active' : 'icon-background'}
-          onClick={() => setActiveCategory(category)}
+          onClick={() => {
+            if (activeCategory == category && category.name !== 'All') {
+              setActiveCategory(categories.find(cat => cat.name === 'All'));
+            } else {
+              setActiveCategory(category);
+            }
+          }}
           key={ category.name }>
           <ReactSVG 
             className={activeCategory.name === category.name ? 'category-icon active' : 'category-icon'}
