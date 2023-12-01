@@ -160,6 +160,7 @@ select {
   font-size: 18px;
   font-family: 'Open Sans'; 
   background-color: var(--background-white);
+  color: black;
 }
 
 @media only screen and (min-width: 651px){ 
